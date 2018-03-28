@@ -1,4 +1,4 @@
-# blocksPlus
+# Peak
 
 ## Build Setup
 
