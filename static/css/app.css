@@ -1,0 +1,71 @@
+/* global css */
+.el-form-item__content{
+  width: 194px;
+}
+.category .el-form-item__content,
+.createproduct .el-form-item__content{
+  width: auto;
+}
+
+/* router new */
+.create{
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #39f;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+/* pagecreate */
+.page{
+  margin: 30px 0;
+  float: right;
+}
+.creBaInfo .w475 .el-form-item__content{
+  width: 550px;
+}
+.city-input-right .el-form-item__content{
+  margin-left: -4px !important;
+}
+
+.left-10 .el-form-item__content{
+  margin-left: 10px !important;
+}
+.width-auto .el-form-item__content{
+  width: auto;
+}
+
+.label-align-left .el-form-item__label{
+  text-align: left;
+}
+.no-padding .el-form-item__label{
+  padding: 0;
+}
+.no-padding .el-form-item__error{
+  margin-left: 28px;
+}
+.upcRadio .el-radio__label{
+  display: none;
+}
+
+/* chapter3 ? */
+/* .chapter3-work-price .el-table_1_column_9 .cell:after{
+  content: '?';
+  display: inline-block;
+  width: 14px;
+  text-align: center;
+  line-height: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 100%;
+  border: 1px solid #999;
+} */
+
+@media print {
+  .header,.menu-expanded,.breadcrumb-container{display:none}
+  .print-words{display: block; height: 30px; color: #000;}
+}
