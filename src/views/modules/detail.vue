@@ -263,7 +263,7 @@ export default {
       }
       getDetailData(params).then((res) => {
         if (res.data.code === 200) {
-          this.template = res.data.resultList[0].Code
+          this.template = res.data.resultList[0].code
           this.imgUrl = res.data.resultList[0].imgUrl
         }
       })
