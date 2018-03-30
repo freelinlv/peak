@@ -20,9 +20,12 @@ import('./routes').then(routes => {
   const router = new VueRouter({
     routes: routeArray
   })
-  new Vue({
+  let vm = new Vue({
     router,
     el: '#app',
     render: h => h(App)
+  })
+  Vue.use({
+    vm
   })
 })
