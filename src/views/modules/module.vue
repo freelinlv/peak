@@ -2,34 +2,40 @@
   <el-row>
     <el-col :span="8" v-for="(item, index) in dataArray" :key="index" class='card'>
       <el-card>
-        <div class="img-container">
-          <img :src=item.imgUrl class="image" width='100%'>
-        </div>
-        <div style="padding: 14px;">
-          <span>{{item.name}}</span>
-          <div class="bottom clearfix">
-            <time class="time">{{ item.create_time}}</time> 
-            <el-button type="text" class="button" @click="jump(item.id)">详情</el-button>
+        <figure class="snip1584">
+          <div class="img-container">
+            <img :src=item.imgUrl class="image" width='100%'>
           </div>
-        </div>
+          <div class="info">
+            <span>{{item.name}}</span>
+            <div class="bottom clearfix">
+              <time class="time">{{ item.create_time}}</time>
+              <el-button type="text" class="button" @click="jump(item.id)">详情</el-button>
+            </div>
+          </div>
+          <figcaption @click="jump(item.id)">
+            <h3>超级好用的表单控件</h3>
+            <h5>详情</h5>
+          </figcaption>
+          <!-- <a href="jump(item.id)"></a> -->
+        </figure>
       </el-card>
     </el-col>
   </el-row>
 </template>
-
 <script>
 import { getDetail } from '@/api/api'
 export default {
-  data () {
+  data() {
     return {
       dataArray: []
     }
   },
-  created () {
+  created() {
     this.getDetail()
   },
   methods: {
-    getDetail () {
+    getDetail() {
       let params = {
 
       }
@@ -40,58 +46,66 @@ export default {
         }
       })
     },
-    jump (id) {
+    jump(id) {
       let url = `/detail/${id}`
       this.$router.push(url)
     }
   }
 }
+
 </script>
 <style scoped>
-  .card{
-    width: 350px;
-    margin: 5px;
-  }
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-  
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
+.card {
+  width: 330px;
+  margin: 5px;
+}
 
-  .button {
-    padding: 0;
-    float: right;
-  }
-  .button a{
-    text-decoration: none;
-    color: #409eff;
-  }
+.time {
+  font-size: 13px;
+  color: #999;
+}
 
-  .img-container{
-    position: relative;
-    height: 150px;
-    width: 300px;
-    overflow: hidden;
-  }
-  .image {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-  }
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
 
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-  
-  .clearfix:after {
-      clear: both
-  }
+.button {
+  padding: 0;
+  float: right;
+}
+
+.button a {
+  text-decoration: none;
+  color: #409eff;
+}
+
+.img-container {
+  width: 90%;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.image {
+  display: block;
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.info {
+  margin: 0 10px;
+  color: #000;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both
+}
+
 </style>

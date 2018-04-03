@@ -69,3 +69,8 @@
   .header,.menu-expanded,.breadcrumb-container{display:none}
   .print-words{display: block; height: 30px; color: #000;}
 }
+
+/*首页card不使用内边距 by ww*/
+.card .el-card__body {
+  padding: 10px 0;
+}
