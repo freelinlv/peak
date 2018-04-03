@@ -13,7 +13,7 @@
             </div>
           </div>
           <figcaption @click="jump(item.id)">
-            <h3>超级好用的表单控件</h3>
+            <h3>{{item.desc}}</h3>
             <h5 style="cursor: pointer;">详情</h5>
           </figcaption>
         </figure>
@@ -24,16 +24,16 @@
 <script>
 import { getDetail } from '@/api/api'
 export default {
-  data() {
+  data () {
     return {
       dataArray: []
     }
   },
-  created() {
+  created () {
     this.getDetail()
   },
   methods: {
-    getDetail() {
+    getDetail () {
       let params = {
 
       }
@@ -44,13 +44,12 @@ export default {
         }
       })
     },
-    jump(id) {
+    jump (id) {
       let url = `/detail/${id}`
       this.$router.push(url)
     }
   }
 }
-
 </script>
 <style scoped>
 .card {
