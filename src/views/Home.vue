@@ -264,6 +264,7 @@ export default {
       margin-top: -54px;
       color: #fff;
       font-weight: 800;
+      cursor: pointer;
     }
     .menu-collapsed {
       flex: 0 0 60px;
@@ -303,6 +304,7 @@ export default {
 }
 
 .fold {
+  transition: all 0.5s ease-out;
   &.menu-expanded {
     margin-left: -200px !important;
   }
