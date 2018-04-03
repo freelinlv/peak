@@ -7,7 +7,7 @@
 		<el-col :span="24" class="main">
 			<aside class="menu-expanded">
 				<div class="logo-width">
-					<h1>Peak</h1>
+					<h1>Peak<sup>1.0</sup></h1>
 				</div>
 				<!--导航菜单-->
 				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"  background-color="#263340" text-color="#fff"
@@ -162,6 +162,10 @@ export default {
 					h1{
 						margin: 0;
 						padding: 0;
+						sup{
+							font-size: 16px;
+							font-weight: normal;
+						}
 					}
 				}
 				.logo-collapse-width{
