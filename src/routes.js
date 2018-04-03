@@ -11,7 +11,7 @@ let routes = [{
     {
       path: '/',
       name: '模块列表',
-      component: Upload
+      component: Module
     },
     {
       path: '/detail/:id',
@@ -21,6 +21,11 @@ let routes = [{
         require(['./views/modules/detail'], resolve)
       },
       hidden: true
+    },
+    {
+      path: '/upload',
+      name: '图片上传',
+      component: Upload
     }
   ]
 }, {
