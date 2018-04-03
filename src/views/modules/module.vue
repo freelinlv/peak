@@ -10,14 +10,12 @@
             <span>{{item.name}}</span>
             <div class="bottom clearfix">
               <time class="time">{{ item.create_time}}</time>
-              <el-button type="text" class="button" @click="jump(item.id)">详情</el-button>
             </div>
           </div>
           <figcaption @click="jump(item.id)">
             <h3>超级好用的表单控件</h3>
-            <h5>详情</h5>
+            <h5 style="cursor: pointer;">详情</h5>
           </figcaption>
-          <!-- <a href="jump(item.id)"></a> -->
         </figure>
       </el-card>
     </el-col>
