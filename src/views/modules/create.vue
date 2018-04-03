@@ -26,6 +26,7 @@
   </el-form>
 </template>
 <script>
+import { createModule } from '@/api/api'
 var AV = require('leancloud-storage')
 var APP_ID = 'a5zjlnxgv6vhjnstba351wh97s3tc40hsot0no9j2b9wa153'
 var APP_KEY = 'qhod8u5iijtvgm16g07gw1dm8f4mgmtqnthsloc7rqkyoxgb'
@@ -48,7 +49,14 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log('submit!')
+      let params = this.form
+      console.log(params)
+      createModule(params).then((res) => {
+        if (res.data.code === 200) {
+          // this.dataArray = res.data.resultList
+          // console.log(this.dataArray)
+        }
+      })
     },
     uploadFile (e) {
       var _this = this

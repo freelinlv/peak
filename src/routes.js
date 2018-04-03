@@ -1,6 +1,6 @@
 import Module from './views/modules/module'
 import Create from './views/modules/create'
-import Upload from './views/upload/upload'
+// import Upload from './views/upload/upload'
 import Home from './views/Home.vue'
 import basicInput from './views/input/basicInput'
 let routes = [{
@@ -27,11 +27,6 @@ let routes = [{
       path: '/create',
       name: '新增模板',
       component: Create
-    },
-    {
-      path: '/upload',
-      name: '图片上传',
-      component: Upload
     }
   ]
 }, {

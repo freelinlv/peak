@@ -28,3 +28,5 @@ export const logOut = params => { return axios({method: 'post', url: '/authui/lo
 export const getDetail = params => { return axios({method: 'get', url: '/api/detail/list', data: params}) }
 // get Detail add id
 export const getDetailData = params => { return axios({method: 'post', url: '/api/detail/detailData', data: qs.stringify(params)}) }
+// create new module
+export const createModule = params => { return axios({method: 'post', url: '/api/detail/createmodule', data: qs.stringify(params)}) }
