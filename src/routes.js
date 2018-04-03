@@ -1,5 +1,5 @@
 import Module from './views/modules/module'
-// import Detail from './views/modules/detail'
+import Upload from './views/upload/upload'
 import Home from './views/Home.vue'
 import basicInput from './views/input/basicInput'
 let routes = [{
@@ -11,7 +11,7 @@ let routes = [{
     {
       path: '/',
       name: '模块列表',
-      component: Module
+      component: Upload
     },
     {
       path: '/detail/:id',
