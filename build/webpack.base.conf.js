@@ -37,9 +37,7 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           resolve('src'),
-          resolve('test'),
-          resolve('node_modules/nr-common'),
-          resolve('node_modules/nr-pms')
+          resolve('test')
         ]
       },
       {
