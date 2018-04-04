@@ -80,5 +80,13 @@ export default {
     } catch (e) {
     }
     return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m)
+  },
+  offsetLeft (el) {
+    var l = 0
+    while (el) {
+      l = l + el.offsetLeft + el.clientLeft
+      el = el.offsetParent
+    }
+    return l
   }
 }
