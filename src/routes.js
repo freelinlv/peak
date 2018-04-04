@@ -32,7 +32,7 @@ let routes = [{
 }, {
   path: '/',
   component: Home,
-  name: 'Input',
+  name: '模板购物车',
   iconCls: 'el-icon-clouds-home',
   children: [{
     path: '/basicInput',

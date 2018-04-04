@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import util from '@/common/js/util'
 
-axios.defaults.baseURL = 'http://140.143.164.116:9999/'
+// axios.defaults.baseURL = 'http://140.143.164.116:9999/'
 // 统一对登录情况做处理
 axios.interceptors.response.use(function (response) {
   const res = response.data
