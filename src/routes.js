@@ -6,7 +6,7 @@ import basicInput from './views/input/basicInput'
 let routes = [{
   path: '/',
   component: Home,
-  name: '工作台',
+  name: '模板工作台',
   iconCls: 'el-icon-clouds-home',
   children: [
     {
@@ -33,7 +33,7 @@ let routes = [{
   path: '/',
   component: Home,
   name: '模板购物车',
-  iconCls: 'el-icon-clouds-home',
+  iconCls: 'el-icon-clouds-basemsg',
   children: [{
     path: '/basicInput',
     name: '基础input',

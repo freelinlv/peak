@@ -7,7 +7,9 @@
     <el-col :span="24" class="main">
       <aside :class="['menu-expanded', {fold: isFold}]">
         <div class="logo-width">
-          <h1>Peak<sup>1.0</sup></h1>
+          <h1>
+						<a href='/#/'>Peak<sup>1.0</sup></a>
+					</h1>
         </div>
         <!--导航菜单-->
         <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect" background-color="#263340" text-color="#fff" unique-opened router>
@@ -165,9 +167,14 @@ export default {
         h1 {
           margin: 0;
 					padding: 0;
-					sup{
-						font-size: 16px;
-						font-weight: normal;
+					a{
+						display:block;
+						text-decoration: none;
+						color: #fff;
+						sup{
+							font-size: 16px;
+							font-weight: normal;
+						}
 					}
         }
       }
@@ -214,10 +221,10 @@ export default {
           height: 20px;
         }
         .el-icon-clouds-home {
-          background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-home.svg') no-repeat center center;
+          background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/acc247eaa856d7e65ca5.svg') no-repeat center center;
         }
         .el-icon-clouds-basemsg {
-          background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-goodsmsg.svg') no-repeat center center;
+          background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/e415cb3dee7ff9f2c7fb.svg') no-repeat center center;
         }
         .el-icon-clouds-purchase {
           background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-purchase.svg') no-repeat center center;
