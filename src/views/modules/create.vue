@@ -10,7 +10,8 @@
       </el-select>
     </el-form-item>
     <el-form-item label="图片上传">
-      <input type="file" id="photoFileUpload"  @change="uploadFile"/>
+      <input type="file" id="photoFileUpload" @change="uploadFile" class="file-btn"/>
+      <el-button type="primary" @click="handleUploadFile">上传</el-button>
       <a :href=form.imgUrl>{{form.imgUrl}}</a>
     </el-form-item>
     <el-form-item label="模板描述" prop="desc" required>
@@ -77,10 +78,17 @@ export default {
         }
       })
     },
+    handleUploadFile () {
+      document.getElementById('photoFileUpload').click()
+    },
     uploadFile (e) {
       var _this = this
       var localFile = e.target.files[0]
       var name = e.target.files[0].name
+      if (!/\.(gif|jpg|jpeg|png|webp)$/i.test(name)) {
+        this.$message({message: '图片类型必须是.gif,jpeg,jpg,png中的一种', type: 'warning'})
+        return
+      }
       var file = new AV.File(name, localFile)
       file.save().then(
         function (file) {
@@ -98,7 +106,9 @@ export default {
 }
 </script>
 <style>
-
+.file-btn{
+  display: none;
+}
 </style>
 
 
