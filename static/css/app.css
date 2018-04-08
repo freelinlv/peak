@@ -1,7 +1,7 @@
 /* global css */
-.el-form-item__content{
+/* .el-form-item__content{
   width: 194px;
-}
+} */
 .category .el-form-item__content,
 .createproduct .el-form-item__content{
   width: auto;
@@ -68,4 +68,14 @@
 @media print {
   .header,.menu-expanded,.breadcrumb-container{display:none}
   .print-words{display: block; height: 30px; color: #000;}
+}
+
+/*首页 card不使用内边距 by ww*/
+.card .el-card__body {
+  padding: 10px 0;
+}
+
+/*详情页 code x方向超出滚动*/
+.hljs {
+  overflow-x: scroll !important;
 }

@@ -1,33 +1,39 @@
 import Module from './views/modules/module'
-// import Detail from './views/modules/detail'
+import Create from './views/modules/create'
+// import Upload from './views/upload/upload'
 import Home from './views/Home.vue'
 import basicInput from './views/input/basicInput'
 let routes = [{
   path: '/',
   component: Home,
-  name: '首页',
+  name: '模板工作台',
   iconCls: 'el-icon-clouds-home',
   children: [
     {
       path: '/',
-      name: '模块列表',
+      name: '模板集市',
       component: Module
     },
     {
       path: '/detail/:id',
-      name: '模块详情',
+      name: '模板详情',
       // component: Detail,
       component: function (resolve) {
         require(['./views/modules/detail'], resolve)
       },
       hidden: true
+    },
+    {
+      path: '/create',
+      name: '新增模板',
+      component: Create
     }
   ]
 }, {
   path: '/',
   component: Home,
-  name: 'Input',
-  iconCls: 'el-icon-clouds-home',
+  name: '模板购物车',
+  iconCls: 'el-icon-clouds-basemsg',
   children: [{
     path: '/basicInput',
     name: '基础input',

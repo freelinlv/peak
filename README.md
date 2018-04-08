@@ -1,4 +1,4 @@
-# Peak
+# Peak 前端模板集市
 
 ## Build Setup
 
@@ -11,6 +11,7 @@ npm run dev
 
 # build for production with minification
 npm run build
+
 ```
 
 

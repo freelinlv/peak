@@ -1,6 +1,11 @@
 import axios from 'axios'
 import qs from 'qs'
 import util from '@/common/js/util'
+console.log()
+if (window.location.href.indexOf('localhost') === -1) {
+  axios.defaults.baseURL = 'http://140.143.164.116:9999/'
+}
+
 // 统一对登录情况做处理
 axios.interceptors.response.use(function (response) {
   const res = response.data
@@ -25,6 +30,8 @@ axios.interceptors.response.use(function (response) {
 export const logOut = params => { return axios({method: 'post', url: '/authui/logout', data: qs.stringify(params)}) }
 
 // getDetail
-export const getDetail = params => { return axios({method: 'get', url: '/api/detail/list', data: params}) }
+export const getDetail = params => { return axios.get(`/api/detail/list`, { params: params }) }
 // get Detail add id
 export const getDetailData = params => { return axios({method: 'post', url: '/api/detail/detailData', data: qs.stringify(params)}) }
+// create new module
+export const createModule = params => { return axios({method: 'post', url: '/api/detail/createmodule', data: qs.stringify(params)}) }
