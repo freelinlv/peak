@@ -27,7 +27,7 @@ axios.interceptors.response.use(function (response) {
 export const logOut = params => { return axios({method: 'post', url: '/authui/logout', data: qs.stringify(params)}) }
 
 // getDetail
-export const getDetail = params => { return axios({method: 'get', url: '/api/detail/list', data: params}) }
+export const getDetail = params => { return axios.get(`/api/detail/list`, { params: params }) }
 // get Detail add id
 export const getDetailData = params => { return axios({method: 'post', url: '/api/detail/detailData', data: qs.stringify(params)}) }
 // create new module

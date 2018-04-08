@@ -1,5 +1,10 @@
 <template>
   <el-row>
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="全部" name=""></el-tab-pane>
+      <el-tab-pane label="图表" name="table"></el-tab-pane>
+      <el-tab-pane label="sug" name="sug"></el-tab-pane>
+    </el-tabs>
     <el-col :span="8" v-for="(item, index) in dataArray" :key="index" class='card'>
       <el-card>
         <figure class="snip1584">
@@ -26,16 +31,17 @@ import { getDetail } from '@/api/api'
 export default {
   data () {
     return {
+      activeName: '',
       dataArray: []
     }
   },
   created () {
-    this.getDetail()
+    this.getDetail('')
   },
   methods: {
-    getDetail () {
+    getDetail (defaultWord) {
       let params = {
-
+        category: defaultWord
       }
       getDetail(params).then((res) => {
         if (res.data.code === 200) {
@@ -43,6 +49,10 @@ export default {
           // console.log(this.dataArray)
         }
       })
+    },
+    handleClick (tab, event) {
+      console.log(tab.name)
+      this.getDetail(tab.name)
     },
     jump (id) {
       let url = `/detail/${id}`
