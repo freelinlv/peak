@@ -53,8 +53,8 @@ export default {
       console.log(params)
       createModule(params).then((res) => {
         if (res.data.code === 200) {
-          // this.dataArray = res.data.resultList
-          // console.log(this.dataArray)
+          this.$message({message: '保存模板成功', type: 'success'})
+          this.$router.push({path: '/'})
         }
       })
     },
