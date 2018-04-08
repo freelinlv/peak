@@ -3,6 +3,15 @@
     <el-col :span="24" class="header">
       <el-col :span="10" class="logo logo-width">
       </el-col>
+      <el-col :span="4" class="userinfo">
+				<el-dropdown trigger="hover">
+					<span class="el-dropdown-link userinfo-inner">{{sysUserName}}</span>
+					<el-dropdown-menu slot="dropdown">
+						<el-dropdown-item @click.native="jumptoIssue">问题建议</el-dropdown-item>
+						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+					</el-dropdown-menu>
+				</el-dropdown>
+			</el-col>
     </el-col>
     <el-col :span="24" class="main">
       <aside :class="['menu-expanded', {fold: isFold}]">
@@ -52,7 +61,7 @@ export default {
   data () {
     return {
       difflogo: Util.isSupplier(),
-      sysUserName: localStorage.getItem('userName') || '',
+      sysUserName: 'user',
       form: {
         name: '',
         region: '',
@@ -79,6 +88,9 @@ export default {
     handleselect: function (a, b) {},
     handleFold () {
       this.isFold = !this.isFold
+    },
+    jumptoIssue () {
+      window.open('https://github.com/PeakPick/peak/issues/new')
     },
     // 退出登录
     logout: function () {
@@ -212,7 +224,7 @@ export default {
         width: auto !important;
         .el-icon-clouds-home,
         .el-icon-clouds-basemsg,
-        .el-icon-clouds-purchase,
+        .el-icon-clouds-issue,
         .el-icon-clouds-setting {
           display: inline-block;
           margin: -4px 12px 0 0;
@@ -226,8 +238,8 @@ export default {
         .el-icon-clouds-basemsg {
           background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/e415cb3dee7ff9f2c7fb.svg') no-repeat center center;
         }
-        .el-icon-clouds-purchase {
-          background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-purchase.svg') no-repeat center center;
+        .el-icon-clouds-issue {
+          background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/969a3a94b86912a7da3a.svg') no-repeat center center;
         }
         .el-icon-clouds-setting {
           background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-set.svg') no-repeat center center;
