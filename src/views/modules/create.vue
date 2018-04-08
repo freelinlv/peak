@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" label-width="80px" :rules="rules" ref="ruleForm" required v-if="flag">
+  <el-form :model="form" label-width="80px" :rules="rules" ref="ruleForm" required>
     <el-form-item label="模板名称" prop="name">
       <el-input v-model="form.name"></el-input>
     </el-form-item>
@@ -38,7 +38,6 @@ AV.init({
 export default {
   data () {
     return {
-      flag: true,
       form: {
         name: '',
         category: '',
@@ -67,18 +66,10 @@ export default {
           let params = this.form
           createModule(params).then(res => {
             if (res.data.code === 200) {
-              this.$message.success('创建成功')
-              this.flag = false
-              this.$nextTick(() => {
-                this.flag = true
-                this.form = {
-                  name: '',
-                  category: '',
-                  imgUrl: '',
-                  desc: '',
-                  code: ''
-                }
-              })
+              this.$message({message: '保存模板成功', type: 'success'})
+              this.$router.push({path: '/'})
+            } else {
+              this.$message({message: '保存模板失败', type: 'error'})
             }
           })
         } else {

@@ -83,6 +83,7 @@ export default {
     },
     handleMousemove (event) {
       if (this.isDrag) {
+        event.preventDefault()
         let noWorkLeft = util.offsetLeft(this.$refs.container) + this.left,
           noWorkRight = 20 + this.left
         if (event.clientX <= noWorkLeft) {
