@@ -27,7 +27,7 @@ import { getDetailData } from '@/api/api'
 import util from '@/common/js/util'
 
 export default {
-  data() {
+  data () {
     return {
       show: true,
       showCopyCode: false,
@@ -37,12 +37,12 @@ export default {
       previewWidth: '50%',
       sourceWidth: '50%',
       hasRegisterMouseEvent: false,
-      hideSourceArea: false,
+      hideSourceArea: false
     }
   },
   components: {
     // 'preview': function(resolve){
-    //   let code = ''  
+    //   let code = ''
     //   let params = {
     //     id: 1
     //   }
@@ -58,10 +58,10 @@ export default {
     //   })
     // }
   },
-  created() {
+  created () {
     this.getList()
   },
-  mounted() {
+  mounted () {
     this.containerWidth = this.$refs.container.clientWidth
     this.bodyWidth = document.body.clientWidth
     if (!this.hasRegisterMouseEvent) {
@@ -70,18 +70,18 @@ export default {
       document.addEventListener('mousemove', this.handleMousemove, false)
     }
   },
-  destroyed() {
+  destroyed () {
     // 组件销毁时，手动移除原生js绑定的事件
     document.removeEventListener('mouseup', this.handleMouseup, false)
     document.removeEventListener('mousemove', this.handleMousemove, false)
   },
   methods: {
-    handleMousedown(event) {
+    handleMousedown (event) {
       this.isDrag = true
       // 计算鼠标与拖拽DOM的相对位置
       this.left = event.clientX - util.offsetLeft(event.target)
     },
-    handleMousemove(event) {
+    handleMousemove (event) {
       if (this.isDrag) {
         let noWorkLeft = util.offsetLeft(this.$refs.container) + this.left,
           noWorkRight = 20 + this.left
@@ -119,14 +119,14 @@ export default {
         }
       }
     },
-    handleMouseup(event) {
+    handleMouseup (event) {
       this.isDrag = false
     },
-    handleDblclick(event) {
+    handleDblclick (event) {
       this.previewWidth = '50%'
       this.sourceWidth = '50%'
     },
-    getList() {
+    getList () {
       let params = {
         id: this.$router.currentRoute.params.id
       }
@@ -137,7 +137,7 @@ export default {
         }
       })
     },
-    toggleShow() {
+    toggleShow () {
       this.show = !this.show
       if (this.show) {
         this.hideSourceArea = false
@@ -150,18 +150,17 @@ export default {
         this.previewWidth = 100 - sourcePercent + '%'
       }
     },
-    copyCode(e) {
+    copyCode (e) {
       let _ = this
       let msg = this.$refs.textarea.value
-      this.$copyText(msg).then(function(e) {
+      this.$copyText(msg).then(function (e) {
         _.$message({ message: '复制成功', type: 'success' })
-      }, function(e) {
+      }, function (e) {
         _.$message.error('当前浏览器不支持拷贝功能')
       })
     }
   }
 }
-
 </script>
 <style lang='scss' scoped>
 .wrapper {
@@ -204,14 +203,15 @@ export default {
     width: 18px;
     height: 100%;
     cursor: col-resize;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.4);
+    // border-left: 1px solid rgba(255, 255, 255, 0.1);
+    // border-right: 1px solid rgba(0, 0, 0, 0.4);
     background: #dedada;
     flex: none;
   }
   pre {
     width: 100%;
     overflow: scroll;
+    margin: 0;
     &>hljs {
       overflow-x: scroll;
     }
