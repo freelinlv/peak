@@ -1,22 +1,23 @@
 <template>
-  <el-form ref="form" :model="form" label-width="80px">
-    <el-form-item label="模板名称">
+  <el-form :model="form" label-width="80px" :rules="rules" ref="ruleForm" required>
+    <el-form-item label="模板名称" prop="name">
       <el-input v-model="form.name"></el-input>
     </el-form-item>
-    <el-form-item label="模板类型">
-      <el-select v-model="form.category" placeholder="选择模板类型" clearable>
+    <el-form-item label="模板类型" prop="category" required>
+      <el-select v-model="form.category" placeholder="选择模板类型" clearable >
         <el-option label="table" value="table"></el-option>
         <el-option label="sug" value="sug"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="图片上传">
-      <input type="file" id="photoFileUpload"  @change="uploadFile"/>
+      <input type="file" id="photoFileUpload" @change="uploadFile" class="file-btn"/>
+      <el-button type="primary" @click="handleUploadFile">上传</el-button>
       <a :href=form.imgUrl>{{form.imgUrl}}</a>
     </el-form-item>
-    <el-form-item label="模板描述">
+    <el-form-item label="模板描述" prop="desc" required>
       <el-input v-model="form.desc"></el-input>
     </el-form-item>
-    <el-form-item label="组件代码">
+    <el-form-item label="组件代码" prop="code" required>
       <el-input type="textarea" class="code" v-model="form.code" :rows="20"></el-input>
     </el-form-item>
     <el-form-item>
@@ -44,43 +45,70 @@ export default {
         imgUrl: '',
         desc: '',
         code: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: '模版名称不能为空', trigger: 'blur' }
+        ],
+        category: [
+          { required: true, message: '模版类型不能为空', trigger: 'blur' }
+        ],
+        desc: [
+          { required: true, message: '模版描述不能为空', trigger: 'blur' }
+        ],
+        code: [{ required: true, message: '组件代码不能为空', trigger: 'blur' }]
       }
     }
   },
   methods: {
     onSubmit () {
-      let params = this.form
-      console.log(params)
-      createModule(params).then((res) => {
-        if (res.data.code === 200) {
-          this.$message({message: '保存模板成功', type: 'success'})
-          this.$router.push({path: '/'})
+      this.$refs['ruleForm'].validate(valid => {
+        if (valid) {
+          let params = this.form
+          createModule(params).then(res => {
+            if (res.data.code === 200) {
+              this.$message({message: '保存模板成功', type: 'success'})
+              this.$router.push({path: '/'})
+            } else {
+              this.$message({message: '保存模板失败', type: 'error'})
+            }
+          })
         } else {
-          this.$message({message: '保存模板失败', type: 'error'})
+          return false
         }
       })
     },
+    handleUploadFile () {
+      document.getElementById('photoFileUpload').click()
+    },
     uploadFile (e) {
       var _this = this
-      // console.log(e.target.files[0])
       var localFile = e.target.files[0]
       var name = e.target.files[0].name
-
+      if (!/\.(gif|jpg|jpeg|png|webp)$/i.test(name)) {
+        this.$message({message: '图片类型必须是.gif,jpeg,jpg,png中的一种', type: 'warning'})
+        return
+      }
       var file = new AV.File(name, localFile)
-      file.save().then(function (file) {
-        // 文件保存成功
-        // console.log(file.url())
-        _this.form.imgUrl = file.url()
-      }, function (error) {
-        // 异常处理
-        console.error(error)
-      })
+      file.save().then(
+        function (file) {
+          // 文件保存成功
+          // console.log(file.url())
+          _this.form.imgUrl = file.url()
+        },
+        function (error) {
+          // 异常处理
+          console.error(error)
+        }
+      )
     }
   }
 }
 </script>
 <style>
-  
+.file-btn{
+  display: none;
+}
 </style>
 
 
