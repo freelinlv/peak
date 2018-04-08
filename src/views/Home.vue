@@ -104,7 +104,7 @@ export default {
   created () {}
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   position: absolute;
   top: 0px;
@@ -265,7 +265,7 @@ export default {
       height: 108px;
       line-height: 108px;
       text-align: center;
-      position: absolute;
+      position: fixed;
       z-index: 100;
       top: 50%;
       margin-top: -54px;
@@ -310,8 +310,15 @@ export default {
   background: rgb(30, 41, 51);
 }
 
+// 过渡效果相关代码
+
+.menu-expanded,
+.fold-handle,
+.content-container {
+  transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+
 .fold {
-  transition: all 0.5s ease-out;
   &.menu-expanded {
     margin-left: -200px !important;
   }
