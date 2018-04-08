@@ -55,6 +55,8 @@ export default {
         if (res.data.code === 200) {
           this.$message({message: '保存模板成功', type: 'success'})
           this.$router.push({path: '/'})
+        } else {
+          this.$message({message: '保存模板失败', type: 'error'})
         }
       })
     },
