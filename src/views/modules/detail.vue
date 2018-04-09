@@ -1,10 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="demo-control">
-      <span class="like-box">
-        <i :class="clickLike?'clickLike':''"></i>
-        <i @click='handleLike' :class="isLike?'like':'unlike'"></i>
-      </span>
+      <el-button class="like-box" @click='handleLike' :plain="true" type="info" size="small">
+          <i :class="clickLike?'clickLike':''"></i>
+          <i :class="isLike?'like':'unlike'"></i>
+          <span class="like-mount">
+            {{starText}}
+          </span>
+      </el-button>
       <el-button @click="toggleShow" :plain="true" type="info" size="small">{{this.show?'隐藏代码': '显示代码'}}</el-button>
       <el-button @click="copyCode" :plain="true" type="info" size="small">拷贝代码</el-button>
     </div>
@@ -44,7 +47,8 @@ export default {
       hasRegisterMouseEvent: false,
       hideSourceArea: false,
       favourite: 0,
-      clickLike: false
+      clickLike: false,
+      starText: 'Star'
     }
   },
   components: {
@@ -84,8 +88,13 @@ export default {
   },
   methods: {
     handleLike () {
-      if (this.isLike) return
-      this.isLike = true
+      this.isLike = !this.isLike
+      if (this.starText === 'Star') {
+        this.starText = 'Unstar'
+      } else {
+        this.starText = 'Star'
+      }
+      if (this.isLike === false) return
       this.clickLike = true
       window.setTimeout(() => {
         this.clickLike = false
@@ -250,13 +259,16 @@ export default {
   cursor: pointer;
 }
 .like-box{
-  margin-right: 20px;
-  position: relative;
-  color: tomato;
+  text-align: left;
+  height: 32px;
+  width: 80px;
+  position: absolute;
+  right: 208px;
+  padding-left: 5px;
   .unlike{
     background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/f58a89a22c0362d7acbf.svg') no-repeat center center;
     background-size: 100% 100%;
-    background-position: 5px 8px;
+    background-position: -5px -7px;
     display: inline-block;
     width: 28px;
     height: 28px;
@@ -264,12 +276,15 @@ export default {
   .like{
     background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/9762aadd51b56af0fc24.svg') no-repeat center center;
     background-size: 100% 100%;
-    background-position: 5px 8px;
+    background-position: -5px -7px;
     display: inline-block;
     width: 28px;
     height: 28px;
   }
   .like-mount{
+    position: absolute;
+    right: 10px;
+    bottom: 7px;
     font-size: 14px;
   }
   .clickLike{
@@ -278,7 +293,7 @@ export default {
     height: 30px;
     animation: happy 1s ease;
     background-size: 100% 100%;
-    background-position: 5px 8px;
+    background-position: -5px -7px;
     position: absolute;
     display: inline-block;
     opacity: 0;
