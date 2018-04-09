@@ -4,10 +4,10 @@
       <h2>Operate Area</h2>
       <el-form :inline='true' :model='operate' label-position='left'>
         <el-form-item label-width='100px' label='Label内容'>
-          <el-input v-model='operate.label' placeholder='' clearable></el-input>
+          <el-input v-model='operate.label' placeholder='' clearable class="simple-input"></el-input>
         </el-form-item>
         <el-form-item label-width='100px' label='P-holder内容'>
-          <el-input v-model='operate.place' placeholder=''></el-input>
+          <el-input v-model='operate.place' placeholder='' class="simple-input"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="save">保存设置</el-button>
@@ -18,7 +18,7 @@
       <h2>Preview Area</h2>
       <el-form :inline='true' :model='operate' label-position='left'>
         <el-form-item label-width='100px' :label='operate.label'>
-          <el-input v-model='filter.input' :placeholder='operate.place'></el-input>
+          <el-input v-model='filter.input' :placeholder='operate.place' class="simple-input"></el-input>
         </el-form-item>
       </el-form>
     </section>

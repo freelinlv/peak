@@ -1,10 +1,10 @@
 <template>
   <el-form :model="form" label-width="80px" :rules="rules" ref="ruleForm" required>
     <el-form-item label="模板名称" prop="name">
-      <el-input v-model="form.name"></el-input>
+      <el-input v-model="form.name" class="simple-input"></el-input>
     </el-form-item>
     <el-form-item label="模板类型" prop="category" required>
-      <el-select v-model="form.category" placeholder="选择模板类型" clearable >
+      <el-select v-model="form.category" placeholder="选择模板类型" clearable class="simple-input">
         <template v-for="item in MODULE_TYPE_LIST">
           <el-option :key="item.value" :label="item.label" :value="item.value"></el-option>
         </template> 
@@ -16,7 +16,7 @@
       <a :href=form.imgUrl>{{form.imgUrl}}</a>
     </el-form-item>
     <el-form-item label="模板描述" prop="desc" required>
-      <el-input v-model="form.desc"></el-input>
+      <el-input v-model="form.desc" class="simple-input"></el-input>
     </el-form-item>
     <el-form-item label="组件代码" prop="code" required>
       <el-input type="textarea" class="code" v-model="form.code" :rows="20"></el-input>
