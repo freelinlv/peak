@@ -28,6 +28,10 @@ module.exports = {
     {
       label: '弹出框',
       value: 'popover'
+    },
+    {
+      label: '其他',
+      value: 'others'
     }
   ]
 }
