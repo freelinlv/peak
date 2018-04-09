@@ -90,7 +90,7 @@ export default {
     handleLike () {
       this.isLike = !this.isLike
       if (this.starText === 'Star') {
-        this.starText = 'unStar'
+        this.starText = 'Unstar'
       } else {
         this.starText = 'Star'
       }
