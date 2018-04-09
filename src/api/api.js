@@ -35,3 +35,6 @@ export const getDetail = params => { return axios.get(`/api/detail/list`, { para
 export const getDetailData = params => { return axios({method: 'post', url: '/api/detail/detailData', data: qs.stringify(params)}) }
 // create new module
 export const createModule = params => { return axios({method: 'post', url: '/api/detail/createmodule', data: qs.stringify(params)}) }
+
+// 点赞
+export const addfavourite = params => { return axios({method: 'post', url: '/api/detail/addfavourite', data: qs.stringify(params)}) }

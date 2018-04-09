@@ -89,7 +89,7 @@ export default {
       var _this = this
       var localFile = e.target.files[0]
       var name = e.target.files[0].name
-      if (!/\.(gif|jpg|jpeg|png|webp)$/i.test(name)) {
+      if (!/\.(gif|jpg|jpeg|png|webp|svg)$/i.test(name)) {
         this.$message({message: '图片类型必须是.gif,jpeg,jpg,png中的一种', type: 'warning'})
         return
       }
@@ -109,7 +109,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped lang="scss">
 .file-btn{
   display: none;
 }
