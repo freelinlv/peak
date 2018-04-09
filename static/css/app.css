@@ -79,3 +79,8 @@
 .hljs {
   overflow-x: scroll !important;
 }
+
+
+.simple-input{
+  width: 300px;
+}
