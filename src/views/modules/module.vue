@@ -2,8 +2,9 @@
   <el-row>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="全部" name=""></el-tab-pane>
-      <el-tab-pane label="图表" name="table"></el-tab-pane>
-      <el-tab-pane label="sug" name="sug"></el-tab-pane>
+      <template v-for="item in MODULE_TYPE_LIST">
+        <el-tab-pane :key="item.value" :label="item.label" :name="item.value"></el-tab-pane>
+      </template> 
     </el-tabs>
     <el-col :span="8" v-for="(item, index) in dataArray" :key="index" class='card'>
       <el-card>
@@ -28,11 +29,14 @@
 </template>
 <script>
 import { getDetail } from '@/api/api'
+import { MODULE_TYPE_LIST } from '@/common/js/config'
+
 export default {
   data () {
     return {
       activeName: '',
-      dataArray: []
+      dataArray: [],
+      MODULE_TYPE_LIST: MODULE_TYPE_LIST
     }
   },
   created () {
