@@ -5,8 +5,9 @@
     </el-form-item>
     <el-form-item label="模板类型" prop="category" required>
       <el-select v-model="form.category" placeholder="选择模板类型" clearable class="simple-input">
-        <el-option label="table" value="table"></el-option>
-        <el-option label="sug" value="sug"></el-option>
+        <template v-for="item in MODULE_TYPE_LIST">
+          <el-option :key="item.value" :label="item.label" :value="item.value"></el-option>
+        </template> 
       </el-select>
     </el-form-item>
     <el-form-item label="图片上传">
@@ -28,6 +29,8 @@
 </template>
 <script>
 import { createModule } from '@/api/api'
+import { MODULE_TYPE_LIST } from '@/common/js/config'
+
 var AV = require('leancloud-storage')
 var APP_ID = 'a5zjlnxgv6vhjnstba351wh97s3tc40hsot0no9j2b9wa153'
 var APP_KEY = 'qhod8u5iijtvgm16g07gw1dm8f4mgmtqnthsloc7rqkyoxgb'
@@ -39,6 +42,7 @@ AV.init({
 export default {
   data () {
     return {
+      MODULE_TYPE_LIST: MODULE_TYPE_LIST,
       form: {
         name: '',
         category: '',
