@@ -16,6 +16,12 @@
             <span>{{item.name}}</span>
             <div class="bottom clearfix">
               <time class="time">{{ item.create_time}}</time>
+              <span class="like-box">
+                <i class="like"></i>
+                <span class="like-mount">
+                  {{item.favourite}}
+                </span>
+              </span>
             </div>
           </div>
           <figcaption @click="jump(item.id)">
@@ -65,7 +71,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .card {
   width: 330px;
   margin: 5px;
@@ -117,6 +123,25 @@ export default {
 
 .clearfix:after {
   clear: both
+}
+
+.like-box{
+  // background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/f58a89a22c0362d7acbf.svg') no-repeat center center;
+  position: absolute;
+  bottom: 2px;
+  color: tomato;
+  right: 20px;
+  .like{
+    background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/9762aadd51b56af0fc24.svg') no-repeat center center;
+    background-size: 100% 100%;
+    background-position: 5px 7px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+  }
+  .like-mount{
+    font-size: 14px;
+  }
 }
 
 </style>

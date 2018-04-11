@@ -1,6 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="demo-control">
+      <el-button class="like-box" @click='handleLike' :plain="true" type="info" size="small">
+          <i :class="clickLike?'clickLike':''"></i>
+          <i :class="isLike?'like':'unlike'"></i>
+          <span class="like-mount">
+            {{starText}}
+          </span>
+      </el-button>
       <el-button @click="toggleShow" :plain="true" type="info" size="small">{{this.show?'隐藏代码': '显示代码'}}</el-button>
       <el-button @click="copyCode" :plain="true" type="info" size="small">拷贝代码</el-button>
     </div>
@@ -23,7 +30,7 @@
   </div>
 </template>
 <script>
-import { getDetailData } from '@/api/api'
+import { getDetailData, addfavourite } from '@/api/api'
 import util from '@/common/js/util'
 
 export default {
@@ -33,11 +40,15 @@ export default {
       showCopyCode: false,
       imgUrl: '',
       template: '',
+      isLike: false,
       isDrag: false,
       previewWidth: '50%',
       sourceWidth: '50%',
       hasRegisterMouseEvent: false,
-      hideSourceArea: false
+      hideSourceArea: false,
+      favourite: 0,
+      clickLike: false,
+      starText: 'Star'
     }
   },
   components: {
@@ -76,6 +87,25 @@ export default {
     document.removeEventListener('mousemove', this.handleMousemove, false)
   },
   methods: {
+    handleLike () {
+      this.isLike = !this.isLike
+      if (this.starText === 'Star') {
+        this.starText = 'Unstar'
+      } else {
+        this.starText = 'Star'
+      }
+      if (this.isLike === false) return
+      this.clickLike = true
+      window.setTimeout(() => {
+        this.clickLike = false
+      }, 1000)
+      const params = {
+        id: this.$router.currentRoute.params.id,
+        favourite: this.favourite
+      }
+      addfavourite(params).then((res) => {
+      })
+    },
     handleMousedown (event) {
       this.isDrag = true
       // 计算鼠标与拖拽DOM的相对位置
@@ -135,6 +165,7 @@ export default {
         if (res.data.code === 200) {
           this.template = res.data.resultList[0].code
           this.imgUrl = res.data.resultList[0].imgUrl
+          this.favourite = res.data.resultList[0].favourite
         }
       })
     },
@@ -227,5 +258,60 @@ export default {
   color: #409EFF;
   cursor: pointer;
 }
-
+.like-box{
+  text-align: left;
+  height: 32px;
+  width: 80px;
+  position: absolute;
+  right: 208px;
+  padding-left: 5px;
+  .unlike{
+    background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/f58a89a22c0362d7acbf.svg') no-repeat center center;
+    background-size: 100% 100%;
+    background-position: -5px -7px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+  }
+  .like{
+    background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/9762aadd51b56af0fc24.svg') no-repeat center center;
+    background-size: 100% 100%;
+    background-position: -5px -7px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+  }
+  .like-mount{
+    position: absolute;
+    right: 10px;
+    bottom: 7px;
+    font-size: 14px;
+  }
+  .clickLike{
+    background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/9762aadd51b56af0fc24.svg') no-repeat center center;
+    width: 30px;
+    height: 30px;
+    animation: happy 1s ease;
+    background-size: 100% 100%;
+    background-position: -5px -7px;
+    position: absolute;
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-20px) rotateZ(5deg);
+  }
+  @keyframes happy{
+    0%{
+      opacity: 0;
+      transform: translateY(-10px) rotateZ(15deg);
+    }
+    50%{
+      opacity: 0.75;
+      transform: scale(1) translateY(-15px) rotateZ(-15deg);
+    }
+    100%{
+      opacity: 0;
+      transform: scale(2) translateY(-20px) rotateZ(15deg);
+    }
+  }
+}
 </style>
