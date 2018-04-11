@@ -116,6 +116,12 @@
       </el-table-column>
     </el-table> -->
     <!-- <h2 class="tit">调整商品</h2> -->
+    <template>
+      <get-preview
+      ref="dialog"
+      >
+      </get-preview>
+    </template>
 </section>
 
 </template>

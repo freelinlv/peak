@@ -1,4 +1,10 @@
+import preview from '@/components/preview/preview'
+import { getDetailData } from '@/api/api'
+// import util from '@/common/js/util'
 export default {
+  components: {
+    'get-preview': preview
+  },
   data () {
     return {
       loading: false,
@@ -30,6 +36,7 @@ export default {
   created () {
     this.getInfo()
     this.addOrderInfo()
+    this.getList()
     // this.getcitylist()
   },
   methods: {
@@ -104,6 +111,17 @@ export default {
       } else {
         return {background: '#fff'}
       }
+    },
+    getList () {
+      let params = {
+        id: this.$router.currentRoute.params.id
+      }
+      getDetailData(params).then((res) => {
+        if (res.data.code === 200) {
+          this.template = res.data.resultList[0].code
+          // this.imgUrl = res.data.resultList[0].imgUrl
+        }
+      })
     }
   }
 }
