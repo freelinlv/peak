@@ -9,8 +9,11 @@
           </span>
       </el-button>
       <el-button @click="toggleShow" :plain="true" type="info" size="small">{{this.show?'隐藏代码': '显示代码'}}</el-button>
-      <el-button @click="copyCode" :plain="true" type="info" size="small">拷贝代码</el-button>
+      <el-button @click="copyCode" :plain="true" type="info" size="small" :key="5">拷贝代码</el-button>
+
+      <el-button @click="preview" :plain="true" type="info" size="small" :key="3">预览效果</el-button>
     </div>
+
     <div class="container" ref="container">
       <div class="preview-area area" ref="preview" :style="{width: previewWidth}">
         <div>
@@ -198,6 +201,9 @@ export default {
       }, function (e) {
         _.$message.error('当前浏览器不支持拷贝功能')
       })
+    },
+    preview () {
+      window.open('http://140.143.164.116:9998/')
     }
   }
 }
@@ -271,7 +277,7 @@ export default {
   height: 32px;
   width: 80px;
   position: absolute;
-  right: 208px;
+  right: 302px;
   padding-left: 5px;
   .unlike{
     background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/f58a89a22c0362d7acbf.svg') no-repeat center center;
