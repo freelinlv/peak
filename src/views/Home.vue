@@ -3,11 +3,22 @@
     <el-col :span="24" class="header">
       <el-col :span="10" class="logo logo-width">
       </el-col>
+      <el-col :span="4" class="userinfo">
+				<el-dropdown trigger="hover">
+					<span class="el-dropdown-link userinfo-inner">{{sysUserName}}</span>
+					<el-dropdown-menu slot="dropdown">
+						<el-dropdown-item @click.native="jumptoIssue">问题建议</el-dropdown-item>
+						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+					</el-dropdown-menu>
+				</el-dropdown>
+			</el-col>
     </el-col>
     <el-col :span="24" class="main">
       <aside :class="['menu-expanded', {fold: isFold}]">
         <div class="logo-width">
-          <h1>Peak<sup>1.0</sup></h1>
+          <h1>
+						<a href='/#/'>Peak<sup>1.0</sup></a>
+					</h1>
         </div>
         <!--导航菜单-->
         <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect" background-color="#263340" text-color="#fff" unique-opened router>
@@ -50,7 +61,7 @@ export default {
   data () {
     return {
       difflogo: Util.isSupplier(),
-      sysUserName: localStorage.getItem('userName') || '',
+      sysUserName: 'user',
       form: {
         name: '',
         region: '',
@@ -78,6 +89,9 @@ export default {
     handleFold () {
       this.isFold = !this.isFold
     },
+    jumptoIssue () {
+      window.open('https://github.com/PeakPick/peak/issues/new')
+    },
     // 退出登录
     logout: function () {
       this.$confirm('确认退出吗?', '提示', {
@@ -102,7 +116,7 @@ export default {
   created () {}
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   position: absolute;
   top: 0px;
@@ -165,9 +179,14 @@ export default {
         h1 {
           margin: 0;
 					padding: 0;
-					sup{
-						font-size: 16px;
-						font-weight: normal;
+					a{
+						display:block;
+						text-decoration: none;
+						color: #fff;
+						sup{
+							font-size: 16px;
+							font-weight: normal;
+						}
 					}
         }
       }
@@ -205,7 +224,7 @@ export default {
         width: auto !important;
         .el-icon-clouds-home,
         .el-icon-clouds-basemsg,
-        .el-icon-clouds-purchase,
+        .el-icon-clouds-issue,
         .el-icon-clouds-setting {
           display: inline-block;
           margin: -4px 12px 0 0;
@@ -214,13 +233,13 @@ export default {
           height: 20px;
         }
         .el-icon-clouds-home {
-          background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-home.svg') no-repeat center center;
+          background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/acc247eaa856d7e65ca5.svg') no-repeat center center;
         }
         .el-icon-clouds-basemsg {
-          background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-goodsmsg.svg') no-repeat center center;
+          background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/e415cb3dee7ff9f2c7fb.svg') no-repeat center center;
         }
-        .el-icon-clouds-purchase {
-          background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-purchase.svg') no-repeat center center;
+        .el-icon-clouds-issue {
+          background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/969a3a94b86912a7da3a.svg') no-repeat center center;
         }
         .el-icon-clouds-setting {
           background: url('https://s.waimai.baidu.com/c/static/mis/pics/nscm-cloud-set.svg') no-repeat center center;
@@ -258,7 +277,7 @@ export default {
       height: 108px;
       line-height: 108px;
       text-align: center;
-      position: absolute;
+      position: fixed;
       z-index: 100;
       top: 50%;
       margin-top: -54px;
@@ -303,8 +322,15 @@ export default {
   background: rgb(30, 41, 51);
 }
 
+// 过渡效果相关代码
+
+.menu-expanded,
+.fold-handle,
+.content-container {
+  transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+
 .fold {
-  transition: all 0.5s ease-out;
   &.menu-expanded {
     margin-left: -200px !important;
   }

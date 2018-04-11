@@ -1,14 +1,13 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-// let test = 'http://10.11.68.142:9999/'
-let test = 'http://140.143.164.116:9999/'
+let test = 'http://10.11.68.146:9999/'
 module.exports = {
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../output/index.html'),
     assetsRoot: path.resolve(__dirname, '../output'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/static/nscm/',
+    assetsPublicPath: '/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.

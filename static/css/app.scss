@@ -7,6 +7,17 @@
   width: auto;
 }
 
+/* 代码高亮部分宽度自适应 */
+.code-style .monaco-editor {
+  width: 100% !important;
+  &>.overflow-guard {
+    width: 100% !important;
+    &>.monaco-scrollable-element {
+      width: calc(100% - 64px) !important;
+    }   
+  }
+}
+
 /* router new */
 .create{
   display: inline-block;
@@ -70,7 +81,17 @@
   .print-words{display: block; height: 30px; color: #000;}
 }
 
-/*首页card不使用内边距 by ww*/
+/*首页 card不使用内边距 by ww*/
 .card .el-card__body {
   padding: 10px 0;
+}
+
+/*详情页 code x方向超出滚动*/
+.hljs {
+  overflow-x: scroll !important;
+}
+
+
+.simple-input{
+  width: 300px;
 }
