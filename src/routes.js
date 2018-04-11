@@ -3,6 +3,8 @@ import Create from './views/modules/create'
 // import Upload from './views/upload/upload'
 import Home from './views/Home.vue'
 import basicInput from './views/input/basicInput'
+import Playground from './views/modules/Playground'
+
 let routes = [{
   path: '/',
   component: Home,
@@ -27,6 +29,11 @@ let routes = [{
       path: '/create',
       name: '新增模板',
       component: Create
+    },
+    {
+      path: '/playground',
+      name: 'Playground',
+      component: Playground
     }
   ]
 }, {
