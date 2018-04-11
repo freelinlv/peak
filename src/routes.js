@@ -2,10 +2,11 @@ import Module from './views/modules/module'
 import Create from './views/modules/create'
 // import Upload from './views/upload/upload'
 import Home from './views/Home.vue'
+import MewHome from './views/index.vue'
 import basicInput from './views/input/basicInput'
 let routes = [{
   path: '/',
-  component: Home,
+  component: MewHome,
   name: '模板工作台',
   iconCls: 'el-icon-clouds-home',
   children: [
