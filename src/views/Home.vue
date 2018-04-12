@@ -95,21 +95,21 @@ export default {
     // 退出登录
     logout: function () {
       this.$confirm('确认退出吗?', '提示', {
-        // type: 'warning'
+        type: 'warning'
       }).then(() => {
-        const postData = {
-          platform: 'SCM_SUPPLIER',
-          channel: 'pc',
-          redirect_url: window.location.href
-        }
-        logOut(postData).then(response => {
-          if (response.data.errno === 0) {
-            localStorage.removeItem('userName')
-            window.location.reload()
-          }
-        }).catch(error => {
-          this.$message.error('服务器傲娇了，请刷新重试')
-        })
+        window.location.href = 'https://uuap.inwaimai.baidu.com/ucenter/userlogin?redirect_url=http%3A%2F%2Fpeak.inwaimai.baidu.com%3A8159%2F%23%2F'
+        // const postData = {
+        //   platform: '',
+        //   channel: 'pc',
+        //   redirect_url: window.location.href
+        // }
+        // logOut(postData).then(response => {
+        //   if (response.data.errno === 0) {
+        //     localStorage.removeItem('userName')
+        //     window.location.reload()
+        //   }
+      }).catch(error => {
+        this.$message.error('服务器傲娇了，请刷新重试')
       })
     }
   },
