@@ -22,15 +22,9 @@
       </div>
       <div :class="['source-area', 'area', { 'hide': hideSourceArea}]" ref="source" :style="{width: sourceWidth}">
         <div class="editor-resizer" @mousedown='handleMousedown' @dblclick='handleDblclick' title="拖拽调整，双击居中"></div>
-        <MonacoEditor
-            v-if='show'
-            class='code-style'
-            height="600"
-            language="html"
-            :code="code"
-            :editorOptions="options"
-            >
-        </MonacoEditor>
+        <highlight-code lang='vue' v-if='show'>
+          {{ code }}
+        </highlight-code>
       </div>
     </div>
   </div>
@@ -39,7 +33,6 @@
 
 import { getDetailData, addfavourite } from '@/api/api'
 import util from '@/common/js/util'
-import MonacoEditor from 'vue-monaco-editor'
 
 export default {
   data () {
@@ -62,7 +55,6 @@ export default {
     }
   },
   components: {
-    MonacoEditor
     // 'preview': function(resolve){
     //   let code = ''
     //   let params = {
