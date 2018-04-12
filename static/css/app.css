@@ -84,3 +84,7 @@
 .simple-input{
   width: 300px;
 }
+
+.td-no-padding .el-table__row td{
+  padding: 0;
+}

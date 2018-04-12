@@ -1,53 +1,35 @@
 <template>
   <section>
-    <el-input v-model="lineNum" placeholder="行" class="line-row"></el-input> X
-    <el-input v-model="rowNum" placeholder="列" class="line-row"></el-input> 
+    <el-input v-model="rowNum" placeholder="列" class="line-row"></el-input> X
+    <el-input v-model="lineNum" placeholder="行" class="line-row"></el-input> 
     <el-button type="primary" @click="addOrderInfo">新增</el-button>
+
     <section v-for="(orderInfo,index) in orderInfoList"
       :key="index">
-      <h2 class="tit">
-        <input v-model="tit[index]" placeholder="标题">
-        <el-button type="primary" @click="deleteOrder(index)">删除</el-button>
-      </h2>
+      {{arraySpanMethod[0]}}
       <el-table
-        :data="orderInfoList[index]"
+        :data="orderInfo"
         border
         style="width: 100%"
-        :span-method="arraySpanMethod[index]"
+        :span-method="arraySpanMethod[0]"
         :cell-style="tableCellStyle"
-        :show-header="false">
-        <el-table-column v-for='(item,num) in orderInfoList[index]' :key='num'>
-          <template slot-scope="scope">
-            <input class="inputText" v-model="scope.row.twoLine" placeholder="str" v-if="num%2!==0">
-            <input class="inputLabel" v-model="scope.row.oneLine" placeholder="label" v-if="num%2===0">
+        :show-header="false"
+        class="td-no-padding">
+        <el-table-column v-for='num in size[index][0]' :key='num' class="sd">
+          <template slot-scope="scope" class="w2390">
+            <div class="cell-container" @click="spanMethod(index,scope.$index,num-1)">
+              {{scope.$index}}
+              {{num}}
+              <input class="inputText" v-model="scope.row['line'+num]" placeholder="str" v-if="num%2===0">
+              <input class="inputLabel" v-model="scope.row['line'+num]" placeholder="laber" v-if="num%2!==0">
+            </div>
           </template>
         </el-table-column>
-        <!-- <el-table-column>
-          <template slot-scope="scope">
-            <input class="inputText" v-model="scope.row.twoLine" placeholder="str">
-          </template>
-        </el-table-column>
-        <el-table-column>
-          <template slot-scope="scope">
-            <input class="inputLabel" v-model="scope.row.threeLine" placeholder="label">
-          </template>
-        </el-table-column>
-        <el-table-column>
-          <template slot-scope="scope">
-            <input class="inputText" v-model="scope.row.fourLine" placeholder="str">
-          </template>
-        </el-table-column>
-        <el-table-column>
-          <template slot-scope="scope">
-            <input class="inputLabel" v-model="scope.row.fiveLine" placeholder="label">
-          </template>
-        </el-table-column>
-        <el-table-column>
-          <template slot-scope="scope">
-            <input class="inputText" v-model="scope.row.sixLine" placeholder="str">
-          </template>
-        </el-table-column> -->
       </el-table>
+           <h2 class="tit">
+        <el-button type="primary" @click="deleteOrder(index)">删除</el-button>
+        <el-button type="primary" @click="deleteOrder(index)">合并单元格</el-button>
+      </h2>
     </section>
     <!-- <h2 class="tit">调整商品</h2> -->
 <!-- 调整商品显示 -->
@@ -71,57 +53,6 @@
         <span v-if="index !==orderInfoList.length-1">,</span>
         <li></li>
     </ul>
-<!-- <ul>
-   <li class="splace3">addOrderInfo () {</li>
-      <li class="splace4">let mdc = 'mdc'</li>
-      <li class="splace4">this.orderInfoList.push(</li>
-        <li class="splace5">[</li>
-          <li class="splace6">{</li>
-            <li class="splace7">oneLine: '',</li>
-            <li class="splace7">twoLine: mdc,</li>
-            <li class="splace7">threeLine: '',</li>
-            <li class="splace7">fourLine: '',</li>
-            <li class="splace7">fiveLine: '',</li>
-            <li class="splace7">sixLine: ''</li>
-          <li class="splace6">},</li>
-        <li class="splace5">]</li>
-      <li class="splace4">)</li>
-    <li class="splace3">},</li>
-</ul> -->
-    <!-- <h2 class="tit">调整单信息</h2>
-    <el-table
-      :data="orderInfo"
-      border
-      style="width: 100%"
-      :span-method="arraySpanMethod"
-      :cell-style="tableCellStyle"
-      :show-header="false">
-      <el-table-column
-        prop="oneLine">
-      </el-table-column>
-      <el-table-column
-        prop="twoLine">
-      </el-table-column>
-      <el-table-column
-        prop="threeLine">
-      </el-table-column>
-      <el-table-column
-        prop="fourLine">
-      </el-table-column>
-      <el-table-column
-        prop="fiveLine">
-      </el-table-column>
-      <el-table-column
-        prop="sixLine">
-      </el-table-column>
-    </el-table> -->
-    <!-- <h2 class="tit">调整商品</h2> -->
-    <template>
-      <get-preview
-      ref="dialog"
-      >
-      </get-preview>
-    </template>
 </section>
 
 </template>
@@ -219,6 +150,9 @@
     }
     .line-row{
       width: 50px;
+    }
+    .cell-container{
+      padding: 12px 0;
     }
   }
 </style>

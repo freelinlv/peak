@@ -8,101 +8,123 @@ export default {
   data () {
     return {
       loading: false,
-      increaseOrder: true,
-      pageData: {
-        page: 1,
-        total: 0,
-        count: 20,
-        page_num: 0
-      },
-      tableData: [],
-      orderInfo: [],
-      orderInfoList: [],
       show: '',
-      tit: [],
-      lineNum: 2,
       rowNum: 3,
+      lineNum: 2,
+      size: [],
+      orderInfoList: [],
       arraySpanMethod: [
-        ({ row, column, rowIndex, columnIndex }) => {
-          if (rowIndex === 2) {
-            if (columnIndex === 1) {
-              return [1, 5]
-            }
-          }
-        }
+        // ({ row, column, rowIndex, columnIndex }) => {
+        //   if (rowIndex === 2) {
+        //     if (columnIndex === 1) {
+        //       return [1, 5]
+        //     }
+        //   }
+        // }
       ]
     }
   },
   created () {
     this.getInfo()
-    this.addOrderInfo()
+    // this.addOrderInfo()
     this.getList()
+    // this.spanMethod(0, 1, 1)
     // this.getcitylist()
   },
   methods: {
     getInfo () {
-      let res = {}
-      this.orderInfo = [
-        {
-          oneLine: '调整单号',
-          twoLine: res.stock_adjust_order_id,
-          threeLine: '调整类型',
-          fourLine: res.adjust_type,
-          fiveLine: '调整数量',
-          sixLine: res.total_adjust_amount
-        },
-        {
-          oneLine: '仓库名称',
-          twoLine: res.warehouse_name,
-          threeLine: '创建人',
-          fourLine: res.creator_name,
-          fiveLine: '创建时间'
-            // sixLine: util.formatTime(orderObj.create_time)
-        },
-        {
-          oneLine: '备注',
-          twoLine: res.remark
-          // threeLine: '',
-          // fiveLine: ''
-
-        }
-      ]
+      // let res = {}
+      // this.orderInfo = []
     },
     addOrderInfo () {
+      this.size.push([ Number(this.rowNum), Number(this.lineNum) ])
       let arr = []
-      for (let i = 0; i < this.lineNum; i++) {
-        arr.push({
-          oneLine: '',
-          twoLine: '',
-          threeLine: '',
-          fourLine: '',
-          fiveLine: '',
-          sixLine: ''
-        })
+      let obj = {}
+      // let checkArr = []
+      for (let i = 0; i < this.rowNum; i++) {
+        obj['line' + i] = ''
       }
-      this.arraySpanMethod.push(() => {})
+      for (let i = 0; i < this.lineNum; i++) {
+        arr.push({})
+      }
+      // let carr = [[2, 1]]
+      this.arraySpanMethod.push(({row, column, rowIndex, columnIndex}, returnFlag) => {
+        // if (rowIndex === 2) {
+        //   if (columnIndex === 1) {
+        //     return [1, 5]
+        //   }
+        // }
+        [[2, 1, 5]].forEach((item) => {
+          console.log('for')
+          if (rowIndex === 2 && columnIndex === 1) {
+            console.log(234)
+            return [1, 5]
+          }
+          // if (rowIndex === 0 && columnIndex === 1) {
+          //   console.log(234)
+          //   return [0, 2]
+          // }
+        })
+
+        // if (returnFlag) {
+        //   return []
+        // }
+        // [[0, 1, 1]].forEach((item) => {
+        //   console.log('for')
+        //   // if (rowIndex === item[0] && columnIndex === item[1]) {
+        //   //   console.log(234)
+        //   //   return [item[1], item[2]]
+        //   // }
+        //   if (rowIndex === 0 && columnIndex === 1) {
+        //     console.log(234)
+        //     return [0, 2]
+        //   }
+        // })
+      })
       this.orderInfoList.push(arr)
     },
     deleteOrder (n) {
+      this.size.splice(n, 1)
       this.orderInfoList.splice(n, 1)
       this.arraySpanMethod.splice(n, 1)
     },
-    changePage (val) {
-      this.pageData.page = val
-      this.getInfo()
+    tableCheck (arg) {
+      this.spanIndex = arg
     },
-    changeSize (val) {
-      this.pageData.count = val
-      this.getInfo()
-    },
-    // 表格备注项合并单元格
-    arraySpanMethod0 ({ row, column, rowIndex, columnIndex }) {
-      console.log({ row, column, rowIndex, columnIndex })
-      if (rowIndex === 2) {
-        if (columnIndex === 1) {
-          return [1, 5]
-        }
+    spanMethod (listNum, rowNum, lineNum) {
+      // console.log(listNum, rowNum, lineNum)
+      // this.arraySpanMethod = []
+      let checkArr = this.arraySpanMethod[listNum]({}, true)
+      console.log(checkArr)
+      if (checkArr.length === 0) {
+        checkArr.push([rowNum, lineNum, 1])
+      } else {
+        checkArr.forEach((item) => {
+          if (item[0] === rowNum) {
+            item[2] += 1
+          }
+        })
       }
+      console.log(checkArr)
+      let fn = ({ row, column, rowIndex, columnIndex }, returnFlag) => {
+        if (returnFlag) {
+          return checkArr
+        }
+        checkArr.forEach((item) => {
+          if (rowIndex === item[0] && columnIndex === item[1]) {
+            return [item[1], item[2]]
+          }
+        })
+      }
+
+      // console.log(listNum, rowNum, lineNum)
+      this.$set(this.arraySpanMethod, listNum, fn)
+      // this.arraySpanMethod.push(fn)
+      // this.arraySpanMethod[listNum] = fn
+      // console.log(this.arraySpanMethod[listNum])
+
+      // console.log(row)
+      // console.log(line)
     },
     // 去掉表格鼠标划入的背景颜色，项目名增加背景色
     tableCellStyle ({row, column, rowIndex, columnIndex}) {
