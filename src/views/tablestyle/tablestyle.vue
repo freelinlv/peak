@@ -3,18 +3,18 @@
     <el-input v-model="rowNum" placeholder="列" class="line-row"></el-input> X
     <el-input v-model="lineNum" placeholder="行" class="line-row"></el-input> 
     <el-button type="primary" @click="addOrderInfo">新增</el-button>
+    <el-button type="primary" @click="output">输出</el-button>
     <section v-for="(orderInfo,index) in orderInfoList"
       :key="index">
-      {{arraySpanMethod[0]}}
       <el-table
         :data="orderInfo"
         border
         style="width: 100%"
-        :span-method="arraySpanMethod[0]"
+        :span-method="arraySpanMethod[index]"
         :cell-style="tableCellStyle"
         :show-header="false"
         class="td-no-padding">
-        <el-table-column v-for='num in size[index][0]' :key='num' class="sd">
+        <el-table-column v-for='num in size[index][0]' :key='num'>
           <template slot-scope="scope" class="w2390">
             <div class="cell-container" @click="spanMethod(index,scope.$index,num-1)">
               <input class="inputText" v-model="scope.row['line'+num]" placeholder="str" v-if="num%2===0">
@@ -25,7 +25,8 @@
       </el-table>
            <h2 class="tit">
         <el-button type="primary" @click="deleteOrder(index)">删除</el-button>
-        <el-button type="primary" @click="deleteOrder(index)">合并单元格</el-button>
+        <el-button type="primary" @click="tableCheck(index,true)" v-if="spanIndex !== index">合并单元格</el-button>
+        <el-button type="primary" @click="tableCheck(index,false)" v-if="spanIndex === index">完成合并</el-button>
       </h2>
     </section>
 </section>

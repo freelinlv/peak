@@ -1,10 +1,10 @@
 export default {
   data () {
     return {
-      loading: false,
       show: '',
       rowNum: 4,
       lineNum: 5,
+      spanIndex: false,
       size: [],
       orderInfoList: [],
       arraySpanMethod: []
@@ -12,7 +12,6 @@ export default {
   },
   created () {
     this.getInfo()
-    this.getList()
   },
   methods: {
     getInfo () {
@@ -25,10 +24,12 @@ export default {
       let obj = {}
       // let checkArr = []
       for (let i = 0; i < this.rowNum; i++) {
-        obj['line' + i] = ''
+        obj['line' + i] = 'str'
       }
       for (let i = 0; i < this.lineNum; i++) {
-        arr.push({})
+        let lineObj = {}
+        Object.assign(lineObj, obj)
+        arr.push(lineObj)
       }
       let carr = []
       this.arraySpanMethod.push(({row, column, rowIndex, columnIndex}, returnFlag) => {
@@ -43,11 +44,15 @@ export default {
       this.orderInfoList.splice(n, 1)
       this.arraySpanMethod.splice(n, 1)
     },
-    tableCheck (arg) {
-      this.spanIndex = arg
+    tableCheck (index, flag) {
+      if (flag) {
+        this.spanIndex = index
+      } else {
+        this.spanIndex = false
+      }
     },
     spanMethod (listNum, rowNum, lineNum) {
-      if (lineNum === 0) {
+      if (lineNum === 0 || this.spanIndex === false) {
         return
       }
       let checkArr = this.arraySpanMethod[listNum]({}, true)
@@ -111,6 +116,62 @@ export default {
       } else {
         return {background: '#fff'}
       }
+    },
+    output () {
+      let str = `<template>
+        <section>
+          <section v-for="(orderInfo,index) in orderInfoList"
+            :key="index">
+            <el-table
+              :data="orderInfo"
+              border
+              style="width: 100%"
+              :span-method="arraySpanMethod[index]"
+              :cell-style="tableCellStyle"
+              :show-header="false"
+              class="td-no-padding">
+              <el-table-column v-for='num in size[index][0]' :key='num'>
+                <template slot-scope="scope" class="w2390">
+                  <input class="inputText" v-model="scope.row['line'+num]" placeholder="str" v-if="num%2===0">
+                  <input class="inputLabel" v-model="scope.row['line'+num]" placeholder="laber" v-if="num%2!==0">
+                </template>
+              </el-table-column>
+            </el-table>
+          </section>
+      </section>
+      </template>
+      <script>
+      export default {
+        data () {
+          return {
+            show: '',
+            size: ${JSON.stringify(this.size)},
+            orderInfoList: ${JSON.stringify(this.orderInfoList)},
+            arraySpanMethod: [${this.arraySpanMethod.toString()}]
+          }
+        },
+        created () {
+          this.getInfo()
+        },
+        methods: {
+          getInfo () {
+            // let res = {}
+            // this.orderInfo = []
+          },
+          // 去掉表格鼠标划入的背景颜色，项目名增加背景色
+          tableCellStyle ({row, column, rowIndex, columnIndex}) {
+            if (columnIndex % 2 === 0) {
+              return {background: '#f5f7fa', textIndent: '20px'}
+            } else {
+              return {background: '#fff'}
+            }
+          }
+          }
+        }
+      }
+      </script>
+      `
+      console.log(str)
     }
   }
 }
