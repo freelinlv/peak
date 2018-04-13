@@ -55,13 +55,13 @@
   </el-row>
 </template>
 <script>
-import { logOut } from '@/api/api'
+import { getUserMsg } from '@/api/api'
 import Util from '@/common/js/util'
 export default {
   data () {
     return {
       difflogo: Util.isSupplier(),
-      sysUserName: 'user',
+      sysUserName: '',
       form: {
         name: '',
         region: '',
@@ -75,7 +75,19 @@ export default {
       isFold: false
     }
   },
+  mounted () {
+    this.getUserMsg()
+  },
   methods: {
+    getUserMsg () {
+      let params = {
+      }
+      getUserMsg(params).then((res) => {
+        if (res.data.code === 200) {
+          this.sysUserName = res.data.result.uname
+        }
+      })
+    },
     onSubmit () {
       // console.log('submit!')
     },
@@ -98,18 +110,6 @@ export default {
         type: 'warning'
       }).then(() => {
         window.location.href = 'https://uuap.inwaimai.baidu.com/ucenter/userlogin?redirect_url=http%3A%2F%2Fpeak.inwaimai.baidu.com%3A8159%2F%23%2F'
-        // const postData = {
-        //   platform: '',
-        //   channel: 'pc',
-        //   redirect_url: window.location.href
-        // }
-        // logOut(postData).then(response => {
-        //   if (response.data.errno === 0) {
-        //     localStorage.removeItem('userName')
-        //     window.location.reload()
-        //   }
-      }).catch(error => {
-        this.$message.error('服务器傲娇了，请刷新重试')
       })
     }
   },
