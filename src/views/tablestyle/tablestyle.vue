@@ -3,7 +3,6 @@
     <el-input v-model="rowNum" placeholder="列" class="line-row"></el-input> X
     <el-input v-model="lineNum" placeholder="行" class="line-row"></el-input> 
     <el-button type="primary" @click="addOrderInfo">新增</el-button>
-
     <section v-for="(orderInfo,index) in orderInfoList"
       :key="index">
       {{arraySpanMethod[0]}}
@@ -18,8 +17,6 @@
         <el-table-column v-for='num in size[index][0]' :key='num' class="sd">
           <template slot-scope="scope" class="w2390">
             <div class="cell-container" @click="spanMethod(index,scope.$index,num-1)">
-              {{scope.$index}}
-              {{num}}
               <input class="inputText" v-model="scope.row['line'+num]" placeholder="str" v-if="num%2===0">
               <input class="inputLabel" v-model="scope.row['line'+num]" placeholder="laber" v-if="num%2!==0">
             </div>
@@ -31,33 +28,9 @@
         <el-button type="primary" @click="deleteOrder(index)">合并单元格</el-button>
       </h2>
     </section>
-    <!-- <h2 class="tit">调整商品</h2> -->
-<!-- 调整商品显示 -->
-    this.orderInfoList = 
-    <ul v-for="(orderInfo,index) in orderInfoList"
-      :key="index">
-        <!-- {{orderInfo}}<br> -->
-        [
-        <div v-for="(obj,num) in orderInfo" :key="num"> 
-          <li class="splace6">{</li>
-            <li class="splace7">oneLine: "{{obj.oneLine}}",</li>
-            <li class="splace7">twoLine: res.{{obj.twoLine}},</li>
-            <li class="splace7" v-if="obj.threeLine">threeLine: "{{obj.threeLine}}",</li>
-            <li class="splace7" v-if="obj.threeLine">fourLine: res.{{obj.fourLine}},</li>
-            <li class="splace7" v-if="obj.fiveLine">fiveLine: "{{obj.fiveLine}}",</li>
-            <li class="splace7" v-if="obj.fiveLine">sixLine: res.{{obj.sixLine}}</li>
-          <span class="splace6">}</span>
-          <span v-if="num !==orderInfo.length-1">,</span>
-        </div>
-        ]
-        <span v-if="index !==orderInfoList.length-1">,</span>
-        <li></li>
-    </ul>
 </section>
-
 </template>
 <script src="./tablestyle.js"></script>
-
 <style lang="scss" scoped>
   section{
     padding: 20px;
