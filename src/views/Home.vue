@@ -57,6 +57,8 @@
 <script>
 import { getUserMsg } from '@/api/api'
 import Util from '@/common/js/util'
+import axios from 'axios'
+import qs from 'qs'
 export default {
   data () {
     return {
@@ -80,12 +82,27 @@ export default {
   },
   methods: {
     getUserMsg () {
-      let params = {
-      }
-      getUserMsg(params).then((res) => {
-        if (res.data.code === 200) {
-          this.sysUserName = res.data.result.uname
-        }
+      // let params = {
+      // }
+      // getUserMsg(params).then((res) => {
+      //   if (res.data.code === 200) {
+      //     this.sysUserName = res.data.result.uname
+      //   }
+      // })
+      // axios({
+      //   method: 'post',
+      //   url: 'http://10.19.144.50:8150/api/user/usrmsg',
+      //   data: qs.stringify({})
+      // }).then((res) => {
+      //   console.log(res)
+      // })
+
+      axios.get('http://10.19.144.50:8150/api/user/usrmsg', {withCredentials: true}, qs.stringify({}))
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.log(err)
       })
     },
     onSubmit () {
