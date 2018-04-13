@@ -34,7 +34,7 @@
   </el-row>
 </template>
 <script>
-import { getUserMsg, getDetail } from '@/api/api'
+import { getDetail } from '@/api/api'
 import { MODULE_TYPE_LIST } from '@/common/js/config'
 import util from '../../common/js/util'
 export default {
@@ -46,21 +46,9 @@ export default {
     }
   },
   created () {
-    this.getUserMsg()
     this.getDetail('')
   },
   methods: {
-    getUserMsg () {
-      console.log(util.getCookie('WMUUAP'))
-      let params = {
-      }
-      getUserMsg(params).then((res) => {
-        if (res.data.code === 200) {
-          // this.dataArray = res.data.resultList
-          // console.log(this.dataArray)
-        }
-      })
-    },
     getDetail (defaultWord) {
       let params = {
         category: defaultWord
@@ -68,7 +56,6 @@ export default {
       getDetail(params).then((res) => {
         if (res.data.code === 200) {
           this.dataArray = res.data.resultList
-          // console.log(this.dataArray)
         }
       })
     },
