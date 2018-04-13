@@ -97,7 +97,7 @@ export default {
       //   console.log(res)
       // })
 
-      axios.get('http://10.19.144.50:8150/api/user/usrmsg', {withCredentials: true}, qs.stringify({}))
+      axios.get('http://10.19.144.50:8150/api/user/usermsg', {withCredentials: true}, qs.stringify({}))
       .then(response => {
         console.log(response)
       })
