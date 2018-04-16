@@ -4,6 +4,7 @@ import util from '@/common/js/util'
 
 if (window.location.href.indexOf('localhost') === -1) {
   axios.defaults.baseURL = 'http://140.143.164.116:9999/'
+  axios.defaults.withCredentials = true
 }
 
 // 统一对登录情况做处理
@@ -29,7 +30,7 @@ if (window.location.href.indexOf('localhost') === -1) {
 // 登出接口
 export const logOut = params => { return axios({method: 'post', url: '/authui/logout', data: qs.stringify(params)}) }
 // getuser msg
-export const getUserMsg = params => { return axios({method: 'get', url: '/api/user/usermsg', data: params}) }
+export const getUserMsg = params => { return axios({method: 'get', url: '/api/user/usermsg', data: params, withCredentials: true}) }
 // getDetail
 export const getDetail = params => { return axios.get(`/api/detail/list`, { params: params }) }
 // get Detail add id
