@@ -57,8 +57,6 @@
 <script>
 import { getUserMsg } from '@/api/api'
 import Util from '@/common/js/util'
-import 'whatwg-fetch'
-import Promise from 'promise-polyfill'
 // import fetch from 'fetch'
 // import axios from 'axios'
 // import qs from 'qs'
