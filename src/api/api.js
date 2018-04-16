@@ -7,7 +7,7 @@ let uuap = ''
 if (window.location.href.indexOf('localhost') === -1) {
   base = 'http://140.143.164.116:9999'
   uuap = 'http://10.19.144.50:8150'
-  axios.defaults.withCredentials = true
+  // axios.defaults.withCredentials = true
 }
 
 // 统一对登录情况做处理
