@@ -6,7 +6,7 @@ let base = ''
 let uuap = ''
 if (window.location.href.indexOf('localhost') === -1) {
   base = 'http://140.143.164.116:9999'
-  uuap = 'http://10.19.144.50:8150'
+  uuap = 'http://peak.inwaimai.baidu.com:8150'
   // axios.defaults.withCredentials = true
 }
 
@@ -29,11 +29,18 @@ if (window.location.href.indexOf('localhost') === -1) {
 //   // 当响应异常时做一些处理
 //   return Promise.reject(error)
 // })
-
 // 登出接口
 export const logOut = params => { return axios({method: 'post', url: '/authui/logout', data: qs.stringify(params)}) }
 // getuser msg
-export const getUserMsg = params => { return axios({method: 'post', url: uuap + '/api/user/usermsg', data: qs.stringify(params), withCredentials: true}) }
+export const getUserMsg = params => {
+  return axios({
+    method: 'post',
+    url: uuap + '/api/user/usermsg',
+    data: qs.stringify(params),
+    withCredentials: true,
+    headers: { 'content-type': 'application/x-www-form-urlencoded' }
+  })
+}
 // getDetail
 export const getDetail = params => { return axios.get(base + `/api/detail/list`, { params: params }) }
 // get Detail add id

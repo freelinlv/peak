@@ -1,7 +1,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 let test = 'http://10.11.68.146:9999/'
-let uuap = 'http://10.19.144.50:8150/'
+let uuap = 'http://peak.inwaimai.baidu.com:8150/'
 // let test = 'http://140.143.164.116:9999/'
 module.exports = {
   build: {
@@ -31,10 +31,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api/user/usermsg': {
-      //   target: uuap,
-      //   changeOrigin: true
-      // },
+      '/api/user/usermsg': {
+        target: uuap,
+        changeOrigin: true
+      }
       // '/api/': {
       //   target: test,
       //   changeOrigin: true
