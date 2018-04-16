@@ -57,8 +57,11 @@
 <script>
 import { getUserMsg } from '@/api/api'
 import Util from '@/common/js/util'
-import axios from 'axios'
-import qs from 'qs'
+import 'whatwg-fetch'
+import Promise from 'promise-polyfill'
+// import fetch from 'fetch'
+// import axios from 'axios'
+// import qs from 'qs'
 export default {
   data () {
     return {
@@ -78,32 +81,44 @@ export default {
     }
   },
   mounted () {
-    // this.getUserMsg()
+    this.getUserMsg()
   },
   methods: {
     getUserMsg () {
-      // let params = {
-      // }
-      // getUserMsg(params).then((res) => {
-      //   if (res.data.code === 200) {
-      //     this.sysUserName = res.data.result.uname
-      //   }
+      let params = {
+      }
+      getUserMsg(params).then((res) => {
+        if (res.data.code === 200) {
+          this.sysUserName = res.data.result.uname
+        }
+      })
+
+      // fetch('http://10.19.144.50:8150/api/user/usermsg', {
+      //   method: 'post',
+      //   credentials: 'include' // 强制加入凭据头
+      // })
+      // .then((res) => {
+      //   return res.text()
+      // })
+      // .then((res) => {
+      //   console.log(res + 1212)
       // })
       // axios({
       //   method: 'post',
-      //   url: 'http://10.19.144.50:8150/api/user/usrmsg',
-      //   data: qs.stringify({})
+      //   url: 'http://10.19.144.50:8150/api/user/usermsg',
+      //   data: qs.stringify({}),
+      //   withCredentials: true
       // }).then((res) => {
       //   console.log(res)
       // })
 
-      axios.get('http://10.19.144.50:8150/api/user/usermsg', {withCredentials: true}, qs.stringify({}))
-      .then(response => {
-        console.log(response)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      // axios.get('http://10.19.144.50:8150/api/user/usermsg', {withCredentials: true}, qs.stringify({}))
+      // .then(response => {
+      //   console.log(response)
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
     },
     onSubmit () {
       // console.log('submit!')

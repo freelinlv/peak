@@ -31,10 +31,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api/user/usermsg': {
-      //   target: uuap,
-      //   changeOrigin: true
-      // },
+      '/api/user/usermsg': {
+        target: uuap,
+        changeOrigin: true
+      },
       '/api/': {
         target: test,
         changeOrigin: true

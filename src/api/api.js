@@ -2,8 +2,11 @@ import axios from 'axios'
 import qs from 'qs'
 import util from '@/common/js/util'
 
+let base = ''
+let uuap = ''
 if (window.location.href.indexOf('localhost') === -1) {
-  axios.defaults.baseURL = 'http://140.143.164.116:9999/'
+  base = 'http://140.143.164.116:9999'
+  uuap = 'http://10.19.144.50:8150'
   // axios.defaults.withCredentials = true
 }
 
@@ -30,13 +33,13 @@ if (window.location.href.indexOf('localhost') === -1) {
 // 登出接口
 export const logOut = params => { return axios({method: 'post', url: '/authui/logout', data: qs.stringify(params)}) }
 // getuser msg
-export const getUserMsg = params => { return axios({method: 'get', url: '/api/user/usermsg', data: params}) }
+export const getUserMsg = params => { return axios({method: 'post', url: uuap + '/api/user/usermsg', data: qs.stringify(params), withCredentials: true}) }
 // getDetail
-export const getDetail = params => { return axios.get(`/api/detail/list`, { params: params }) }
+export const getDetail = params => { return axios.get(base + `/api/detail/list`, { params: params }) }
 // get Detail add id
-export const getDetailData = params => { return axios({method: 'post', url: '/api/detail/detailData', data: qs.stringify(params)}) }
+export const getDetailData = params => { return axios({method: 'post', url: base + '/api/detail/detailData', data: qs.stringify(params)}) }
 // create new module
-export const createModule = params => { return axios({method: 'post', url: '/api/detail/createmodule', data: qs.stringify(params)}) }
+export const createModule = params => { return axios({method: 'post', url: base + '/api/detail/createmodule', data: qs.stringify(params)}) }
 
 // 点赞
-export const addfavourite = params => { return axios({method: 'post', url: '/api/detail/addfavourite', data: qs.stringify(params)}) }
+export const addfavourite = params => { return axios({method: 'post', url: base + '/api/detail/addfavourite', data: qs.stringify(params)}) }
