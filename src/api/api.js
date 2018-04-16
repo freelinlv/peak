@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import util from '@/common/js/util'
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 let base = ''
 let uuap = ''
 if (window.location.href.indexOf('localhost') === -1) {
