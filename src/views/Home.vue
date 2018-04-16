@@ -78,7 +78,7 @@ export default {
     }
   },
   mounted () {
-    this.getUserMsg()
+    // this.getUserMsg()
   },
   methods: {
     getUserMsg () {
