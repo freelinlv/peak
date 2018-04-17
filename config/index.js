@@ -1,6 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-let test = 'http://10.11.68.146:9999/'
+// let test = 'http://10.11.68.146:9999/'
 let uuap = 'http://peak.inwaimai.baidu.com:8150/'
 // let test = 'http://140.143.164.116:9999/'
 module.exports = {
