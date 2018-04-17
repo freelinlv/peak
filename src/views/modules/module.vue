@@ -36,7 +36,7 @@
 <script>
 import { getDetail } from '@/api/api'
 import { MODULE_TYPE_LIST } from '@/common/js/config'
-
+import util from '../../common/js/util'
 export default {
   data () {
     return {
@@ -56,7 +56,6 @@ export default {
       getDetail(params).then((res) => {
         if (res.data.code === 200) {
           this.dataArray = res.data.resultList
-          // console.log(this.dataArray)
         }
       })
     },

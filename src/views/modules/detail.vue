@@ -21,18 +21,16 @@
         </div>
       </div>
       <div :class="['source-area', 'area', { 'hide': hideSourceArea}]" ref="source" :style="{width: sourceWidth}">
-        <div class="editor-resizer" v-on="{mousedown: handleMousedown, dblclick: handleDblclick}" title="拖拽调整，双击居中"></div>
-        <highlight-code lang="Markdown" v-if="show">
-          {{template}}
+        <div class="editor-resizer" @mousedown='handleMousedown' @dblclick='handleDblclick' title="拖拽调整，双击居中"></div>
+        <highlight-code lang='vue' v-if='show'>
+          {{ code }}
         </highlight-code>
-        <textarea v-show='showCopyCode' ref="textarea">
-          {{template}}
-        </textarea>
       </div>
     </div>
   </div>
 </template>
 <script>
+
 import { getDetailData, addfavourite } from '@/api/api'
 import util from '@/common/js/util'
 
@@ -40,9 +38,11 @@ export default {
   data () {
     return {
       show: true,
-      showCopyCode: false,
       imgUrl: '',
-      template: '',
+      code: '',
+      options: {
+        selectOnLineNumbers: false
+      },
       isLike: false,
       isDrag: false,
       previewWidth: '50%',
@@ -117,8 +117,8 @@ export default {
     handleMousemove (event) {
       if (this.isDrag) {
         event.preventDefault()
-        let noWorkLeft = util.offsetLeft(this.$refs.container) + this.left,
-          noWorkRight = 20 + this.left
+        let noWorkLeft = util.offsetLeft(this.$refs.container) + this.left
+        let noWorkRight = 20 + this.left
         if (event.clientX <= noWorkLeft) {
           this.previewWidth = '0%'
           this.sourceWidth = '100%'
@@ -166,7 +166,7 @@ export default {
       }
       getDetailData(params).then((res) => {
         if (res.data.code === 200) {
-          this.template = res.data.resultList[0].code
+          this.code = res.data.resultList[0].code.trim()
           this.imgUrl = res.data.resultList[0].imgUrl
           this.favourite = res.data.resultList[0].favourite
         }
@@ -187,7 +187,7 @@ export default {
     },
     copyCode (e) {
       let _ = this
-      let msg = this.$refs.textarea.value
+      let msg = this.code
       this.$copyText(msg).then(function (e) {
         _.$message({ message: '复制成功', type: 'success' })
       }, function (e) {
