@@ -7,7 +7,8 @@ export default {
       spanIndex: false,
       size: [],
       orderInfoList: [],
-      arraySpanMethod: []
+      arraySpanMethod: [],
+      arraySpanMethodstr: []
     }
   },
   created () {
@@ -23,8 +24,8 @@ export default {
       let arr = []
       let obj = {}
       // let checkArr = []
-      for (let i = 0; i < this.rowNum; i++) {
-        obj['line' + i] = 'str'
+      for (let i = 1; i < this.rowNum + 1; i++) {
+        obj['line' + i] = ''
       }
       for (let i = 0; i < this.lineNum; i++) {
         let lineObj = {}
@@ -34,15 +35,21 @@ export default {
       let carr = []
       this.arraySpanMethod.push(({row, column, rowIndex, columnIndex}, returnFlag) => {
         if (returnFlag) {
-          return carr
+          return carr || []
         }
       })
       this.orderInfoList.push(arr)
+      this.arraySpanMethodstr.push(`({row, column, rowIndex, columnIndex}, returnFlag) => {
+        if (returnFlag) {
+          return carr || []
+        }
+      }`)
     },
     deleteOrder (n) {
       this.size.splice(n, 1)
       this.orderInfoList.splice(n, 1)
       this.arraySpanMethod.splice(n, 1)
+      this.arraySpanMethodstr.splice(n, 1)
     },
     tableCheck (index, flag) {
       if (flag) {
@@ -51,19 +58,26 @@ export default {
         this.spanIndex = false
       }
     },
+    // 还原已合并的单元格
+    restore (n) {
+      let carr = []
+      let fn = (obj, returnFlag) => {
+        if (returnFlag) {
+          return carr
+        }
+      }
+      this.$set(this.arraySpanMethod, n, fn)
+    },
     spanMethod (listNum, rowNum, lineNum) {
       if (lineNum === 0 || this.spanIndex === false) {
         return
       }
       let checkArr = this.arraySpanMethod[listNum]({}, true)
-      // console.log(checkArr)
       // 合并单元格操作
-      console.log(checkArr)
       if (checkArr.length === 0) {
         checkArr.push([rowNum, lineNum - 1, 2])
       } else {
         let spanflag = {}
-
         checkArr.forEach((item, index) => {
           if ((item[0] === rowNum)) {
             if ((item[1] + item[2]) === lineNum) {
@@ -71,7 +85,6 @@ export default {
               spanflag.afterIndex = index
               // 点击已被合并的单元格
             } else if (item[1] === lineNum) {
-              console.log('iI')
               spanflag.before = true
               spanflag.beforeIndex = index
             }
@@ -91,6 +104,9 @@ export default {
       }
       let fn = ({row, column, rowIndex, columnIndex}, returnFlag) => {
         if (returnFlag) {
+          if (!checkArr) {
+            checkArr = []
+          }
           return checkArr
         }
         let returnArr = []
@@ -107,7 +123,24 @@ export default {
           return returnArr
         }
       }
+      let fnStr = `({row, column, rowIndex, columnIndex}, returnFlag) => {
+        let returnArr = []
+        let arr = ${JSON.stringify(checkArr)}
+        arr.forEach((item) => {
+          if (rowIndex === item[0]) {
+            if (columnIndex === item[1]) {
+              returnArr = [1, item[2]]
+            } else if (columnIndex > item[1] && columnIndex < (item[1] + item[2])) {
+              returnArr = [0, 0]
+            }
+          }
+        })
+        if (returnArr.length !== 0) {
+          return returnArr
+        }
+      }`
       this.$set(this.arraySpanMethod, listNum, fn)
+      this.arraySpanMethodstr[listNum] = fnStr
     },
     // 去掉表格鼠标划入的背景颜色，项目名增加背景色
     tableCellStyle ({row, column, rowIndex, columnIndex}) {
@@ -118,6 +151,34 @@ export default {
       }
     },
     output () {
+      let orderInfoData = []
+      let orderInfoFn = []
+      this.orderInfoList.forEach((arr, index) => {
+        orderInfoData[index] = []
+        orderInfoFn[index] = []
+        arr.forEach((obj, num) => {
+          let strData = {}
+          let strFn = {}
+          // console.log(this.size[index][0])
+          for (let i = 1; i < this.size[index][0] + 1; i++) {
+            if (obj['line' + i] === '') {
+              continue
+            }
+            if (i % 2 !== 0) {
+              strData['line' + i] = obj['line' + i]
+              strFn['line' + i] = obj['line' + i]
+            } else {
+              strData['line' + i] = ''
+              strFn['line' + i] = 'res.' + obj['line' + i] + 'laststr'
+            }
+          }
+          orderInfoData[index].push(strData)
+          orderInfoFn[index].push(strFn)
+        })
+      })
+      let orderInfoDataStr = JSON.stringify(orderInfoData).replace(/"/g, "'")
+      let orderInfoFnStr = JSON.stringify(orderInfoFn).replace(/"/g, "'")
+      orderInfoFnStr = orderInfoFnStr.replace(/'res/g, 'res').replace(/laststr'/g, '')
       let str = `<template>
         <section>
           <section v-for="(orderInfo,index) in orderInfoList"
@@ -128,12 +189,10 @@ export default {
               style="width: 100%"
               :span-method="arraySpanMethod[index]"
               :cell-style="tableCellStyle"
-              :show-header="false"
-              class="td-no-padding">
+              :show-header="false">
               <el-table-column v-for='num in size[index][0]' :key='num'>
                 <template slot-scope="scope" class="w2390">
-                  <input class="inputText" v-model="scope.row['line'+num]" placeholder="str" v-if="num%2===0">
-                  <input class="inputLabel" v-model="scope.row['line'+num]" placeholder="laber" v-if="num%2!==0">
+                  {{scope.row['line'+num]}}
                 </template>
               </el-table-column>
             </el-table>
@@ -146,8 +205,8 @@ export default {
           return {
             show: '',
             size: ${JSON.stringify(this.size)},
-            orderInfoList: ${JSON.stringify(this.orderInfoList)},
-            arraySpanMethod: [${this.arraySpanMethod.toString()}]
+            orderInfoList: ${orderInfoDataStr},
+            arraySpanMethod: [${this.arraySpanMethodstr}]
           }
         },
         created () {
@@ -155,8 +214,8 @@ export default {
         },
         methods: {
           getInfo () {
-            // let res = {}
-            // this.orderInfo = []
+            let res = {}
+            this.orderInfoList = ${orderInfoFnStr}
           },
           // 去掉表格鼠标划入的背景颜色，项目名增加背景色
           tableCellStyle ({row, column, rowIndex, columnIndex}) {
@@ -168,8 +227,28 @@ export default {
           }
           }
         }
-      }
       </script>
+      <style lang="scss" scoped>
+        section{
+          padding: 20px;
+          padding-bottom: 0;
+          background: #fff;
+          .el-pagination{
+            text-align: right;
+          }
+          .table-area{
+            overflow: hidden;
+            background-color: #fff;
+          }
+          .content-rowspan>div{
+            padding: 5px 0;
+            border-bottom: 1px solid #e6ebf5;
+          }
+          .line-row{
+            width: 50px;
+          }
+        }
+      </style>
       `
       console.log(str)
     }

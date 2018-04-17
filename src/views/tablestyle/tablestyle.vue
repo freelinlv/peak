@@ -17,8 +17,8 @@
         <el-table-column v-for='num in size[index][0]' :key='num'>
           <template slot-scope="scope" class="w2390">
             <div class="cell-container" @click="spanMethod(index,scope.$index,num-1)">
-              <input class="inputText" v-model="scope.row['line'+num]" placeholder="str" v-if="num%2===0">
-              <input class="inputLabel" v-model="scope.row['line'+num]" placeholder="laber" v-if="num%2!==0">
+              <input class="inputText" v-model="scope.row['line'+num]" :disabled="spanIndex === index" placeholder="str" v-if="num%2===0">
+              <input class="inputLabel" v-model="scope.row['line'+num]" :disabled="spanIndex === index" placeholder="laber" v-if="num%2!==0">
             </div>
           </template>
         </el-table-column>
@@ -27,6 +27,7 @@
         <el-button type="primary" @click="deleteOrder(index)">删除</el-button>
         <el-button type="primary" @click="tableCheck(index,true)" v-if="spanIndex !== index">合并单元格</el-button>
         <el-button type="primary" @click="tableCheck(index,false)" v-if="spanIndex === index">完成合并</el-button>
+        <el-button type="primary" @click="restore(index)" v-if="spanIndex === index">还原</el-button>
       </h2>
     </section>
 </section>
@@ -37,50 +38,6 @@
     padding: 20px;
     padding-bottom: 0;
     background: #fff;
-    ul{
-      li{
-        list-style: none;
-      }
-      .splace3{
-        padding-left: 10px; 
-      }
-      .splace4{
-        padding-left: 20px; 
-      }
-      .splace5{
-        padding-left: 30px; 
-      }
-      .splace6{
-        padding-left: 40px; 
-      }
-      .splace7{
-        padding-left: 50px; 
-      }
-      .splace8{
-        padding-left: 60px; 
-      }
-      .splace9{}
-    }
-    .tit{
-      color: #5a5e66;
-      input{
-        background-color: #fff;
-        -webkit-appearance: none;
-        border-radius: 4px;
-        border: 1px solid transparent;
-        box-sizing: border-box;
-        display: inline-block;
-        // font-size: inherit;
-        // height: 40px;
-        // line-height: 1;
-        color: #5a5e66;
-        font-size: 24px;
-        outline: 0;
-        font-weight: bold;
-        padding: 0;
-        width: 90%;
-      }
-    }
     .el-pagination{
       text-align: right;
     }
