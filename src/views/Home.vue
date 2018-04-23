@@ -55,13 +55,16 @@
   </el-row>
 </template>
 <script>
-import { logOut } from '@/api/api'
+import { getUserMsg } from '@/api/api'
 import Util from '@/common/js/util'
+// import fetch from 'fetch'
+// import axios from 'axios'
+// import qs from 'qs'
 export default {
   data () {
     return {
       difflogo: Util.isSupplier(),
-      sysUserName: 'user',
+      sysUserName: '',
       form: {
         name: '',
         region: '',
@@ -75,7 +78,46 @@ export default {
       isFold: false
     }
   },
+  mounted () {
+    this.getUserMsg()
+  },
   methods: {
+    getUserMsg () {
+      let params = {
+      }
+      getUserMsg(params).then((res) => {
+        if (res.data.code === 200) {
+          this.sysUserName = res.data.result.uname
+        }
+      })
+
+      // fetch('http://10.19.144.50:8150/api/user/usermsg', {
+      //   method: 'post',
+      //   credentials: 'include' // 强制加入凭据头
+      // })
+      // .then((res) => {
+      //   return res.text()
+      // })
+      // .then((res) => {
+      //   console.log(res + 1212)
+      // })
+      // axios({
+      //   method: 'post',
+      //   url: 'http://10.19.144.50:8150/api/user/usermsg',
+      //   data: qs.stringify({}),
+      //   withCredentials: true
+      // }).then((res) => {
+      //   console.log(res)
+      // })
+
+      // axios.get('http://10.19.144.50:8150/api/user/usermsg', {withCredentials: true}, qs.stringify({}))
+      // .then(response => {
+      //   console.log(response)
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
+    },
     onSubmit () {
       // console.log('submit!')
     },
@@ -95,21 +137,9 @@ export default {
     // 退出登录
     logout: function () {
       this.$confirm('确认退出吗?', '提示', {
-        // type: 'warning'
+        type: 'warning'
       }).then(() => {
-        const postData = {
-          platform: 'SCM_SUPPLIER',
-          channel: 'pc',
-          redirect_url: window.location.href
-        }
-        logOut(postData).then(response => {
-          if (response.data.errno === 0) {
-            localStorage.removeItem('userName')
-            window.location.reload()
-          }
-        }).catch(error => {
-          this.$message.error('服务器傲娇了，请刷新重试')
-        })
+        window.location.href = 'https://uuap.inwaimai.baidu.com/ucenter/userlogin?redirect_url=http%3A%2F%2Fpeak.inwaimai.baidu.com%3A8159%2F%23%2F'
       })
     }
   },

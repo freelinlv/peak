@@ -8,6 +8,17 @@
   width: auto;
 }
 
+/* 代码高亮部分宽度自适应 */
+.code-style .monaco-editor {
+  width: 100% !important;
+  &>.overflow-guard {
+    width: 100% !important;
+    &>.monaco-scrollable-element {
+      width: calc(100% - 64px) !important;
+    }   
+  }
+}
+
 /* router new */
 .create{
   display: inline-block;

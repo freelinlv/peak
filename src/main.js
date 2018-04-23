@@ -8,10 +8,11 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import 'font-awesome/css/font-awesome.min.css'
 import VueHighlightJS from 'vue-highlight.js'
-import 'highlight.js/styles/default.css'
+import 'highlight.js/styles/atom-one-dark.css'
 import VueClipboard from 'vue-clipboard2'
-// import VueHighlightJS from 'vue-highlightjs'
-
+import Vuep from 'vuep-plus'
+import 'vuep-plus/dist/vuep.css'
+Vue.component('Vuep', Vuep)
 import('./routes').then(routes => {
   const routeArray = routes.default
   Vue.use(ElementUI)

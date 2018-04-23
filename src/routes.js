@@ -4,6 +4,8 @@ import Create from './views/modules/create'
 import Home from './views/Home.vue'
 import MewHome from './views/index.vue'
 import basicInput from './views/input/basicInput'
+import Playground from './views/modules/Playground'
+
 let routes = [{
   path: '/',
   component: MewHome,
@@ -28,6 +30,11 @@ let routes = [{
       path: '/create',
       name: '新增模板',
       component: Create
+    },
+    {
+      path: '/playground',
+      name: 'Playground',
+      component: Playground
     }
   ]
 }, {
