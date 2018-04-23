@@ -3,6 +3,7 @@ import Create from './views/modules/create'
 // import Upload from './views/upload/upload'
 import Home from './views/Home.vue'
 import basicInput from './views/input/basicInput'
+import tablestyle from './views/tablestyle/tablestyle.vue'
 import Playground from './views/modules/Playground'
 
 let routes = [{
@@ -45,6 +46,11 @@ let routes = [{
     path: '/basicInput',
     name: '基础input',
     component: basicInput
+  },
+  {
+    path: '/tablestyle',
+    name: '创建表格',
+    component: tablestyle
   }]
 },
 {
