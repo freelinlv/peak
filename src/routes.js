@@ -2,13 +2,12 @@ import Module from './views/modules/module'
 import Create from './views/modules/create'
 // import Upload from './views/upload/upload'
 import Home from './views/Home.vue'
-import MewHome from './views/index.vue'
 import basicInput from './views/input/basicInput'
 import Playground from './views/modules/Playground'
-
+import baseModules from './views/baseModules/baseModules'
 let routes = [{
   path: '/',
-  component: MewHome,
+  component: Home,
   name: '模板工作台',
   iconCls: 'el-icon-clouds-home',
   children: [
@@ -46,6 +45,10 @@ let routes = [{
     path: '/basicInput',
     name: '基础input',
     component: basicInput
+  }, {
+    path: '/baseModules',
+    name: '基础模板',
+    component: baseModules
   }]
 },
 {
