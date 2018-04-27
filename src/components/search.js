@@ -1,11 +1,15 @@
 const str = `
 <template>
   <div>
-    <div class="filterContainer" @dblclick="dbclicka(_self)">
+    <div class="filterContainer">
       <el-form  class="searchZoom" ref="filter" :model="filter" :rules="rules" :inline="true" label-width="100px" label-position="right">
-        <el-form-item  label="冻结单号" prop="stockFrozenOrderId">
-          <el-input v-model.trim="filter.stockFrozenOrderId" placeholder="请输入冻结单号"></el-input>
-        </el-form-item>
+      <!-- form -->
+      <el-row :gutter="100" class="searchBtnBox">
+        <el-col>   
+          <el-button type="primary" @click="search(1)">查询</el-button>
+          <el-button class="resetBtn" @click="resetFilter">重置</el-button>
+        </el-col>  
+      </el-row>
       </el-form>
     </div>
   </div>
@@ -14,79 +18,51 @@ const str = `
 <script>
 export default {
   data () {
-    let checkFromDate = (rule, value, callback, source, options) => {
-      if (!value) {
-        callback(new Error('请选择创建时间'))
-      }
-      if (util.beyoundNinetyDays(value)) {
-        callback(new Error('创建时间查询不可以超过90天'))
-      }
-      callback()
-    }
     return {
-      _self:this,
+      //data
       filter: {
-        warehouseId: '',
-        stockFrozenOrderId: '',
-        skuId: '',
-        skuName: '',
-        createType: '',
-        orderStatus: '',
-        time: '',
-        startTime: '',
-        endTime: ''
+        //filter
       },
-      timeOptions: [{
-        label: '冻结时间',
-        value: '1'
-      }, {
-        label: '关闭时间',
-        value: '2'
-      }],
-      timeVal: '1',
       rules: {
-        warehouseId: [{required: true, message: '请选择仓库', trigger: 'change'}],
-        time: [{ required: true, validator: checkFromDate, trigger: 'change blur' }],
-        stockFrozenOrderId: [{
-          required: false,
-          message: '请输入有效的冻结单号',
-          trigger: 'change'
-        }]
-      },
-      wareComponent: {
-        showOrNot: false,
-        params: {
-          query_type: 1
-        },
-        url: '/warehouse/main/getwarehouseincitylist'
-      },
-      showOrNot: false,
-      // 列表展示
-      businessTabel: {
-        orders: [],
-        currentPage: 1,
-        currentPageSize: 20,
-        total: 0
       }
     }
   },
+
   watch: {
-    'filter.time': function (val) {
-      if (val) {
-        this.filter.startTime = val[0].getTime() / 1000
-        this.filter.endTime = val[1].getTime() / 1000
-      } else {
-        this.filter.startTime = ''
-        this.filter.endTime = ''
-      }
-    }
   },
+
   created () {
   },
-  
+
   methods: {
-    dbclicka(a){
-      console.log(a,window.event)
+    /**
+     * 重置查询条件
+     *
+     */
+    resetFilter () {
+      this.filter = Object.assign({}, this.filter, {
+        //重置查询条件
+      })
+    },
+    /**
+     * 查询操作
+     *
+     */
+    search (pageNum) {
+      this.$refs['filter'].validate((valid) => {
+        if (!valid) return false
+        // this.opeartionTabel = Object.assign({}, this.opeartionTabel, {
+        //   orders: []
+        // })
+        // let params = this.filter
+        // getstockoutorderlist(params).then((res) => {
+        //   if (res.data.error_no === 0) {
+        //     this.opeartionTabel = Object.assign({}, this.opeartionTabel, res.data.result)
+        //   } else {
+        //     this.$message({message: res.data.error_msg, type: 'error'})
+        //   }
+        // })
+      })
     }
   }
 }
@@ -94,27 +70,28 @@ export default {
 </script>
 
 <style>
-  .filterContainer {
-    padding: 10px 30px;
-    background-color: #fff;
-    
-  }
+.filterContainer {
+  padding: 10px 30px;
+  background-color: #fff;
   .headTab {
     margin-bottom: 20px;
   }
   .el-form-item {
     margin-right: 30px;
-    
+    .el-form-item__content {
+      width: auto!important;
+    }
+    .el-button {
+      margin-left: 90px;
+    }
   }
-  .filterTimeBox{
-    display: inline-block;
+}
+.searchBtnBox{
+  margin-left: 50px;
+  .resetBtn{
+    margin-left: 15px;
   }
-  .el-form-item__content {
-    width: auto!important;
-  }
-  .el-button {
-    margin-left: 90px;
-  }
+}
 </style>
 
 

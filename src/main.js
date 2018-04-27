@@ -12,9 +12,9 @@ import 'highlight.js/styles/atom-one-dark.css'
 import VueClipboard from 'vue-clipboard2'
 import Vuep from 'vuep-plus'
 import 'vuep-plus/dist/vuep.css'
-Vue.component('Vuep', Vuep)
 import('./routes').then(routes => {
   const routeArray = routes.default
+  Vue.use(Vuep)
   Vue.use(ElementUI)
   Vue.use(VueRouter)
   Vue.use(VueHighlightJS)
