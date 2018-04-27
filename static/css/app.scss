@@ -2,6 +2,7 @@
 /* .el-form-item__content{
   width: 194px;
 } */
+
 .category .el-form-item__content,
 .createproduct .el-form-item__content{
   width: auto;
@@ -17,7 +18,12 @@
     }   
   }
 }
-
+.vuep-editor{
+  // display: none;
+}
+.vuep-preview{
+  // width: 100% !important;
+}
 /* router new */
 .create{
   display: inline-block;

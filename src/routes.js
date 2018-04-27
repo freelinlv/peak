@@ -5,7 +5,7 @@ import Home from './views/Home.vue'
 import basicInput from './views/input/basicInput'
 import tablestyle from './views/tablestyle/tablestyle.vue'
 import Playground from './views/modules/Playground'
-
+import baseModules from './views/baseModules/baseModules'
 let routes = [{
   path: '/',
   component: Home,
@@ -46,6 +46,10 @@ let routes = [{
     path: '/basicInput',
     name: '基础input',
     component: basicInput
+  }, {
+    path: '/baseModules',
+    name: '基础模板',
+    component: baseModules
   },
   {
     path: '/tablestyle',

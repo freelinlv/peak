@@ -1,0 +1,117 @@
+html,body{
+  width: 100vw;
+  height: 100vh;
+}
+html{
+  font-size: 16px;
+}
+body{
+  overflow: scroll;
+}
+.p-cf {
+  zoom: 1;
+}
+.p-cf:before, .p-cf:after {
+  display: table; 
+  content: " ";
+}
+.p-cf:after {
+  height: 0; 
+  clear: both;
+  font-size: 0;
+  visibility: hidden;
+}
+
+
+.p-fl {
+  float: left;
+}
+
+
+.p-fr {
+  float: right;
+}
+
+
+.p-dib {
+  display: inline-block;
+}
+
+
+.p-di {
+  display: inline;
+}
+
+.p-db {
+  display: block;
+}
+
+.p-dn {
+  display: none;
+}
+
+.p-tal {
+  text-align: left;
+}
+
+
+.p-tar {
+  text-align: right;
+}
+
+
+.p-tac {
+  text-align: center;
+}
+
+
+.p-vam {
+  vertical-align: middle;
+}
+
+.p-oh {
+  overflow: hidden;
+}
+
+.p-font-h1 {
+  font-family: "Helvetica Neue", Tahoma, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, STHeitiSC, sans-serif; 
+  font-size: 2.125rem;
+  line-height: 3.75rem;
+}
+
+.p-font-h2 {
+  font-family: "Helvetica Neue", Tahoma, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, STHeitiSC, sans-serif; 
+  font-size: 1.5rem;
+  line-height: 2.625rem;
+}
+
+.p-font-h3 {
+  font-family: "Helvetica Neue", Tahoma, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, STHeitiSC, sans-serif; 
+  font-size: 1.25rem;
+  line-height: 2.25rem;
+}
+
+.p-font-h4 {
+  font-family: "Helvetica Neue", Tahoma, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, STHeitiSC, sans-serif; 
+  font-size: 1rem;
+  line-height: 1.875rem;
+}
+
+.p-font-h5 {
+  font-family: "Helvetica Neue", Tahoma, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, STHeitiSC, sans-serif; 
+  font-size: .875rem;
+  line-height: 1.5rem;
+}
+
+.p-font-a1 {
+  font-family: "Helvetica Neue", Tahoma, "PingFang SC", "Hiragino Sans GB", SimSun, STHeitiSC, sans-serif; 
+  font-size: .875rem;
+  line-height: 1.5rem;
+}
+
+.p-font-a2 {
+  font-family: "Helvetica Neue", Tahoma, "PingFang SC", "Hiragino Sans GB", SimSun, STHeitiSC, sans-serif; 
+  font-size: .75rem;
+  line-height: 1.25rem;
+}
+

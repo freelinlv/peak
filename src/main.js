@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import '../static/css/style.scss'
 import '../static/css/app.scss'
 import '../static/css/hover.css'
 import App from './App.vue'
@@ -11,9 +12,9 @@ import 'highlight.js/styles/atom-one-dark.css'
 import VueClipboard from 'vue-clipboard2'
 import Vuep from 'vuep-plus'
 import 'vuep-plus/dist/vuep.css'
-Vue.component('Vuep', Vuep)
 import('./routes').then(routes => {
   const routeArray = routes.default
+  Vue.use(Vuep)
   Vue.use(ElementUI)
   Vue.use(VueRouter)
   Vue.use(VueHighlightJS)
