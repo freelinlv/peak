@@ -11,11 +11,11 @@
       <el-button @click="toggleShow" :plain="true" type="info" size="small">{{this.show?'隐藏代码': '显示代码'}}</el-button>
       <el-button @click="copyCode" :plain="true" type="info" size="small" :key="5">拷贝代码</el-button>
 
-      <el-button @click="preview" :plain="true" type="info" size="small" :key="3">预览效果</el-button>
+      <!-- <el-button @click="preview" :plain="true" type="info" size="small" :key="3">预览效果</el-button> -->
     </div>
 
     <div class="container" ref="container">
-      <div class="preview-area area" ref="preview" :style="{width: previewWidth}">
+      <!-- <div class="preview-area area" ref="preview" :style="{width: previewWidth}">
         <div>
           <img :src="imgUrl" alt="" width="100%" />
         </div>
@@ -25,7 +25,9 @@
         <highlight-code lang='vue' v-if='show'>
           {{ code }}
         </highlight-code>
-      </div>
+      </div> -->
+      <vuep ref="vuep" :options="vuepOptions" :show-code="show" :value="code" :imgUrl="imgUrl">
+      </vuep>
     </div>
   </div>
 </template>
@@ -40,6 +42,9 @@ export default {
       show: true,
       imgUrl: '',
       code: '',
+      vuepOptions: {
+        readOnly: true
+      },
       options: {
         selectOnLineNumbers: false
       },
@@ -174,29 +179,31 @@ export default {
     },
     toggleShow () {
       this.show = !this.show
-      if (this.show) {
-        this.hideSourceArea = false
-        this.previewWidth = '50%'
-        this.sourceWidth = '50%'
-      } else {
-        this.hideSourceArea = true
-        let sourcePercent = 20 / this.containerWidth * 100
-        this.sourceWidth = sourcePercent + '%'
-        this.previewWidth = 100 - sourcePercent + '%'
-      }
+      this.$refs.vuep.changeshowCode(this.show)
+      // if (this.show) {
+      //   this.hideSourceArea = false
+      //   this.previewWidth = '50%'
+      //   this.sourceWidth = '50%'
+      // } else {
+      //   this.hideSourceArea = true
+      //   let sourcePercent = 20 / this.containerWidth * 100
+      //   this.sourceWidth = sourcePercent + '%'
+      //   this.previewWidth = 100 - sourcePercent + '%'
+      // }
     },
     copyCode (e) {
       let _ = this
       let msg = this.code
+
       this.$copyText(msg).then(function (e) {
         _.$message({ message: '复制成功', type: 'success' })
       }, function (e) {
         _.$message.error('当前浏览器不支持拷贝功能')
       })
-    },
-    preview () {
-      window.open('http://140.143.164.116:9998/')
     }
+    // preview () {
+    //   window.open('http://140.143.164.116:9998/')
+    // }
   }
 }
 </script>
@@ -269,7 +276,7 @@ export default {
   height: 32px;
   width: 80px;
   position: absolute;
-  right: 302px;
+  right: 210px;
   padding-left: 5px;
   .unlike{
     background: url('http://lc-a5zjlnxg.cn-n1.lcfile.com/f58a89a22c0362d7acbf.svg') no-repeat center center;

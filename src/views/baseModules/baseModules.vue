@@ -105,7 +105,6 @@ export default {
       let resetNum = code.indexOf('//重置查询条件') - 1
       code = code.substring(0, resetNum) + resetStr + code.substring(resetNum)
       this.code = code
-      console.log(this.code)
     },
     addSelect () {
       let tempStr = `<el-form-item label="${this.selectForm.label}">
@@ -131,7 +130,6 @@ export default {
       let resetNum = code.indexOf('//重置查询条件') - 1
       code = code.substring(0, resetNum) + resetStr + code.substring(resetNum)
       this.code = code
-      console.log(this.code)
     }
   }
 }

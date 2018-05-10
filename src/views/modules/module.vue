@@ -60,7 +60,6 @@ export default {
       })
     },
     handleClick (tab, event) {
-      console.log(tab.name)
       this.getDetail(tab.name)
     },
     jump (id) {

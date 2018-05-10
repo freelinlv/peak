@@ -42,10 +42,9 @@ export default {
   },
   methods: {
     save () {
-      let inputText = `<el-form-item label-width='100px' label='${this.operate.label}'>
-          <el-input v-model='filter.input' placeholder='${this.operate.place}'></el-input>
-        </el-form-item>`
-      console.log(inputText)
+      // let inputText = `<el-form-item label-width='100px' label='${this.operate.label}'>
+      //     <el-input v-model='filter.input' placeholder='${this.operate.place}'></el-input>
+      //   </el-form-item>`
     }
   }
 }

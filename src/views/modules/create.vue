@@ -19,10 +19,11 @@
       <el-input v-model="form.desc" class="simple-input"></el-input>
     </el-form-item>
     <el-form-item label="组件代码" prop="code" required>
-      <el-input type="textarea" class="code" v-model="form.code" :rows="20"></el-input>
+      <vuep @input="changeCode" @input-error="inputError">
+      </vuep>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">立即创建</el-button>
+      <el-button :disabled="isError || form.code===''"  type="primary" @click="onSubmit">立即创建</el-button>
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
@@ -50,6 +51,7 @@ export default {
         desc: '',
         code: ''
       },
+      isError: true,
       rules: {
         name: [
           { required: true, message: '模版名称不能为空', trigger: 'blur' }
@@ -65,6 +67,12 @@ export default {
     }
   },
   methods: {
+    changeCode (code) {
+      this.form.code = code
+    },
+    inputError (isError) {
+      this.isError = isError
+    },
     onSubmit () {
       this.$refs['ruleForm'].validate(valid => {
         if (valid) {
@@ -85,6 +93,7 @@ export default {
     handleUploadFile () {
       document.getElementById('photoFileUpload').click()
     },
+
     uploadFile (e) {
       var _this = this
       var localFile = e.target.files[0]
@@ -102,7 +111,6 @@ export default {
         },
         function (error) {
           // 异常处理
-          console.error(error)
         }
       )
     }

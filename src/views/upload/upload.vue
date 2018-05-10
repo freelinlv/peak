@@ -20,17 +20,14 @@ export default {
   },
   methods: {
     uploadFile (e) {
-      console.log(e.target.files[0])
       var localFile = e.target.files[0]
       var name = e.target.files[0].name
 
       var file = new AV.File(name, localFile)
       file.save().then(function (file) {
         // 文件保存成功
-        console.log(file.url())
       }, function (error) {
         // 异常处理
-        console.error(error)
       })
     }
   }

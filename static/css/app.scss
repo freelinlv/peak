@@ -24,6 +24,15 @@
 .vuep-preview{
   // width: 100% !important;
 }
+.editor-resizer {
+  width: 18px;
+  height: 100%;
+  cursor: col-resize;
+  // border-left: 1px solid rgba(255, 255, 255, 0.1);
+  // border-right: 1px solid rgba(0, 0, 0, 0.4);
+  background: #dedada;
+  flex: none;
+}
 /* router new */
 .create{
   display: inline-block;

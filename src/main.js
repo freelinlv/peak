@@ -7,19 +7,14 @@ import '../static/css/hover.css'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import 'font-awesome/css/font-awesome.min.css'
-import VueHighlightJS from 'vue-highlight.js'
-import 'highlight.js/styles/atom-one-dark.css'
 import VueClipboard from 'vue-clipboard2'
-import Vuep from 'vuep-plus'
-import 'vuep-plus/dist/vuep.css'
+// import VueHighlightJS from 'vue-highlight.js'
+// import 'highlight.js/styles/atom-one-dark.css'
+import './components/vuep/index.js'
+import './components/vuep/style/vuep.scss'
 import('./routes').then(routes => {
   const routeArray = routes.default
-  Vue.use(Vuep)
-  Vue.use(ElementUI)
-  Vue.use(VueRouter)
-  Vue.use(VueHighlightJS)
-  Vue.use(VueClipboard)
-  // Vue.use(VueHighlightJS)
+  Vue.use(VueRouter).use(ElementUI).use(VueClipboard)
   const router = new VueRouter({
     routes: routeArray
   })

@@ -90,7 +90,6 @@ export default {
     return l
   },
   getCookie (name) {
-    console.log(name)
     // var name = name + '='
     var value = '; ' + document.cookie
     var parts = value.split('; ' + name + '=')
